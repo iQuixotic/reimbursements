@@ -8,7 +8,7 @@ const routes = require('./routes');
 // Define middleware
 app.use(bodyParser.urlencoded({ extended: true }));
 app.use(bodyParser.json());
-// app.use(routes);
+app.use(routes);
 
 // listen on port PORT
 app.listen(PORT, () => {
