@@ -8,7 +8,7 @@ class User {
     private firstName: string; // not null
     private lastName: string; // not null
     private email: string; // not null
-    private role: Role; // not null
+    private role: number; // not null
 
     constructor(userId, username, password, firstName,
                 lastName, email, role) {
@@ -19,6 +19,9 @@ class User {
         this.lastName =lastName;
         this.email = email;
         this.role =role;
+    }
+    public getUsers(){
+      return `SELECT * FROM users`;
     }
   public getUser(id){
     const userData = {
