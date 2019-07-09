@@ -1,6 +1,8 @@
 var db = require('../models/User');
-var {Client} = require('pg');
+// var {Client} = require('pg');
 var connection = require('../config/connection');
+// import connection from '../config/connection'
+// import {Client} from 'pg';
 // import client from '../config/connection';
 
 

@@ -1,4 +1,6 @@
 // const db = require('../models/queries');
+// import {Client} from 'pg';
+// import { connection }  from '../config/connection';
 var {Client} = require('pg');
 var connection = require('../config/connection');
 

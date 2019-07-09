@@ -1,7 +1,8 @@
 // const db = require('../models/queries');
 // const connection = require('../config/connection');
-var {Client} = require('pg');
-var connection = require('../config/connection.ts');
+// import connection from '../config/connection';
+// var {Client} = require('pg');
+// var connection = require('../config/connection.ts');
 // import client from '../config/connection';
 
 module.exports = {

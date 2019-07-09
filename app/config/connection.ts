@@ -1,4 +1,4 @@
-var {Client} = require('pg');
+import {Client} from 'pg';
 var SECRET = require('./secret');
 
 const client = new Client({
