@@ -1,46 +1,47 @@
-// var db = require('../models/User');
 import db from '../models/User';
 import { Request, Response } from 'express';
-import connection from '../config/connection';
+import client from '../config/connection';
 
 module.exports = {
-    
     // get all of the users
     getAll: async (req: Request, res: Response) => {
-        try {
-            connection.connect();
-            const x = await connection.query(db.users)
+        try {            
+            client.connect();
+            const x = await client.query(db.users)
             console.log(x.rows); 
+            return res.json(x.rows[0]);
         } catch (err) {
             throw err;
         } finally {
-            connection.end();
+            console.log('i made it here')
+            client.end();
         }
-
       },
+      
     // get a single user by id
     getOne: async (req: Request, res: Response) => {
         try {
-            connection.connect();
+            client.connect();
+            const id = await req.params.id;
+            const x = await client.query(db.getOne(id));
+            console.log(x.rows);
+            return res.json(x.rows[0]);
         } catch (err) {
             throw err;
         } finally {
-            connection.end();
+            client.end();
         }
-        
-        console.log('come in and get one from users.');
     },
+
     // update a single user
     update: async (req: Request, res: Response) => {
         try {
-            connection.connect();
+            client.connect();
         } catch (err) {
             throw err;
         } finally {
-            connection.end();
+            client.end();
         }
-        
-        console.log('come in and update the users.');
 
     }
 

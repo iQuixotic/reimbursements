@@ -1,31 +1,35 @@
-// const db = require('../models/queries');
-// import {Client} from 'pg';
-// import  { client }  from '../config/connection';
-var client = require('../config/connection');
-// var {Client} = require('pg');
-var connection = require('../config/connection');
+import db from '../models/Reimbursement';
+import { Request, Response } from 'express';
+import client from '../config/connection';
 
 module.exports = {
     
     // CREATE a new db entry for a single reimbursement
-    add: (req, res) => {
+    add: async (req: Request, res: Response) => {
         console.log('come in and get the add.');
-    //   connection.query(db.create(req.body.action), (error, results, fields) => {
-    //     if (error) throw error;
-    //     res.send({ obj: results })
-    //   })
-
+        try {            
+            client.connect();
+            const x = await client.query(db.users)
+            console.log(x.rows); 
+            return res.json(x.rows[0]);
+        } catch (err) {
+            throw err;
+        } finally {
+            console.log('i made it here')
+            client.end();
+        }
+      },
     },
     // update a single reimbursement
-    update: (req, res) => {
+    update: async (req: Request, res: Response) => {
         console.log('come in and get the update.');
     },
     // get the author for a single reimbursement
-    getAuthor: (req, res) => {
+    getAuthor: async (req: Request, res: Response) => {
         console.log('come in and get the author.');
     },
     // get the status for a single reimbursement
-    getStatus: (req, res) => {
+    getStatus: async (req: Request, res: Response) => {
         console.log('come in and get the status.');
     },
 

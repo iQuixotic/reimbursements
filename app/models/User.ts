@@ -1,6 +1,3 @@
-// const db = require('someConnection');
-// const Role = require('./Roles')
-
 class User {
     private userId: number; // primary key
     private username: string; // not null, unique
@@ -24,6 +21,11 @@ class User {
 
     static get users() {
       const x = 'SELECT * FROM users';
+      return x;
+    }
+
+    static getOne(id) {
+      const x = `SELECT * FROM users WHERE userid = ${id}`;
       return x;
     }
 

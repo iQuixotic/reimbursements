@@ -4,6 +4,7 @@
   "description": "a node (typescript) back-end only",
   "main": "server.ts",
   "scripts": {
+    "start": "ts-node server.ts",
     "test": "echo \"Error: no test specified\" && exit 1"
   },
   "repository": {

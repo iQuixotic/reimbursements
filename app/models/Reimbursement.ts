@@ -49,10 +49,12 @@ class Reimbursement {
     this.resolver = x.resolver;
     this.status = x.status;
     this.type = x.type;
+  }
 
-    // db.somethingConnection(dbName, password, data)
+  set reimb(data) {
+
   }
     
 }
 
-module.exports = {Reimbursement};
+export default Reimbursement;

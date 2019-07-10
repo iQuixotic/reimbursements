@@ -1,19 +1,12 @@
-// const db = require('../models/queries');
-// const connection = require('../config/connection');
-// import connection from '../config/connection';
-// var {Client} = require('pg');
-// var connection = require('../config/connection.ts');
-// import client from '../config/connection';
+import db from '../models/User';
+import { Request, Response } from 'express';
+import connection from '../config/connection';
 
 module.exports = {
     
     // CREATE a new db entry for login event
-    login: (req, res) => {
+    login: async (req: Request, res: Response) => {
         console.log('come in to login.');
-        // connection.connect()
-        //     .then(() => console.log('connected successfully'))
-        //     .catch(e => console.log(e))
-        //     .finally(() => connection.end());
     },
 
 }
