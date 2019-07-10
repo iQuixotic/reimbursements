@@ -19,7 +19,7 @@ class User {
         this.role = role;
     }
 
-    static get users() {
+    static getAll() {
       const x = 'SELECT * FROM users';
       return x;
     }
@@ -27,6 +27,13 @@ class User {
     static getOne(id) {
       const x = `SELECT * FROM users WHERE userid = ${id}`;
       return x;
+    }
+
+    static setOne(data) {
+      const x = data;
+      // const query = `UPDATE users
+      //                WHERE userid = ${data.id}
+      //                SET ${data[Object.keys]} = ${data.myRow}`
     }
 
   // public getUser(id){

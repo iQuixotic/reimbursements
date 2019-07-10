@@ -11,19 +11,19 @@ class Reimbursement {
     private status: number; // foreign ey -> ReimbursementStatus, not null
     private type: number; // foreign key -> ReimbursementType
 
-    constructor(reimbursementId, author, amount,
-                dateSubmitted, dateResolved, description,
-                resolver, status, type) {
-        this.reimbursementId = reimbursementId;
-        this.author = author;
-        this.amount = amount;
-        this.dateSubmitted = dateSubmitted;
-        this.dateResolved = dateResolved;
-        this.description = description;
-        this.resolver = resolver;
-        this.status = status;
-        this.type = type;
-    }
+    // constructor(reimbursementId, author, amount,
+    //             dateSubmitted, dateResolved, description,
+    //             resolver, status, type) {
+    //     this.reimbursementId = reimbursementId;
+    //     this.author = author;
+    //     this.amount = amount;
+    //     this.dateSubmitted = dateSubmitted;
+    //     this.dateResolved = dateResolved;
+    //     this.description = description;
+    //     this.resolver = resolver;
+    //     this.status = status;
+    //     this.type = type;
+    // }
   public getReimbursement(id) {
     const reimbursementData = {
         reimbursementId: this.reimbursementId,
@@ -51,7 +51,7 @@ class Reimbursement {
     this.type = x.type;
   }
 
-  set reimb(data) {
+  static set reimbursement(data) {
 
   }
     
