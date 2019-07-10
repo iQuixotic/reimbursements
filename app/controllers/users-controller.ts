@@ -1,47 +1,45 @@
-var db = require('../models/User');
-// var {Client} = require('pg');
-var connection = require('../config/connection');
-// import connection from '../config/connection'
-// import {Client} from 'pg';
-// import client from '../config/connection';
-
-
-// client.query('SELECT NOW() as now', (err, res) => {
-//     if (err) {
-//       console.log(err.stack)
-//     } else {
-//       console.log(res.rows[0])
-//     }
-//   })
-  
-//   // promise
-//   client.query('SELECT NOW() as now')
-//     .then(res => console.log(res.rows[0]))
-//     .catch(e => console.error(e.stack))
-
+// var db = require('../models/User');
+import db from '../models/User';
+import { Request, Response } from 'express';
+import connection from '../config/connection';
 
 module.exports = {
     
     // get all of the users
-    getAll: (req, res) => {
-        console.log('come in and get all.');
-        //    connection.connect()
-        //     .then(() => connection.query(db.getUsers())
-        //     .then(res => console.log(res))
-        //     .catch(e => console.log(e))
-        //     .finally(() => connection.end()));
-        // connection.query(db.getUsers()), (error, res, fields) => {
-        // if (error) throw error;
-        // console.log(res)
-        // res.send({ obj: res })
+    getAll: async (req: Request, res: Response) => {
+        try {
+            connection.connect();
+            const x = await connection.query(db.users)
+            console.log(x.rows); 
+        } catch (err) {
+            throw err;
+        } finally {
+            connection.end();
+        }
+
       },
-    //   .then(res => console.log(res))
     // get a single user by id
-    getOne: (req, res) => {
+    getOne: async (req: Request, res: Response) => {
+        try {
+            connection.connect();
+        } catch (err) {
+            throw err;
+        } finally {
+            connection.end();
+        }
+        
         console.log('come in and get one from users.');
     },
     // update a single user
-    update: (req, res) => {
+    update: async (req: Request, res: Response) => {
+        try {
+            connection.connect();
+        } catch (err) {
+            throw err;
+        } finally {
+            connection.end();
+        }
+        
         console.log('come in and update the users.');
 
     }

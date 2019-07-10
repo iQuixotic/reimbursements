@@ -1,7 +1,7 @@
-import {Client} from 'pg';
+import {Pool} from 'pg';
 var SECRET = require('./secret');
 
-const client = new Client({
+const client = new Pool({
     user: SECRET.DB_USER,
     password:SECRET.DB_PASSWORD,
     host: SECRET.DB_HOST,
@@ -9,4 +9,4 @@ const client = new Client({
     database: SECRET.DB_DATABASE
 });
 
-module.exports = client;
+export default client;

@@ -1,4 +1,3 @@
-// const db = require('someConnection');
 
 class ReimbursementType {
     private typeId: number; // primary key

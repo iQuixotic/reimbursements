@@ -1,7 +1,8 @@
 // const db = require('../models/queries');
 // import {Client} from 'pg';
-// import { connection }  from '../config/connection';
-var {Client} = require('pg');
+// import  { client }  from '../config/connection';
+var client = require('../config/connection');
+// var {Client} = require('pg');
 var connection = require('../config/connection');
 
 module.exports = {
@@ -18,17 +19,14 @@ module.exports = {
     // update a single reimbursement
     update: (req, res) => {
         console.log('come in and get the update.');
-
     },
     // get the author for a single reimbursement
     getAuthor: (req, res) => {
         console.log('come in and get the author.');
-
     },
     // get the status for a single reimbursement
     getStatus: (req, res) => {
         console.log('come in and get the status.');
-
     },
 
 }

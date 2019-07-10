@@ -1,10 +1,10 @@
+// pacakages
 import express from 'express';
 import bodyParser from 'body-parser';
-// const express = require("express");
-// const bodyParser = require("body-parser");
-
-const PORT = process.env.PORT || 4044;
 const app = express();
+
+// internal files and variables
+const PORT = process.env.PORT || 4044;
 const routes = require('./app/routes');
 
 // Define middleware
