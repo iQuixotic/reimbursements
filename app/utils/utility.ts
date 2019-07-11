@@ -1,9 +1,13 @@
-
 // create an array and get the object's keys
 const keysFromObjs =(obj) => {
     const arr = [];
-    for(let keys in obj)  arr.push(keys);
 
+    // iterate over keys, but ignore the ids
+    for(let keys in obj)  
+        if(keys !== 'userid') arr.push(keys);
+    
+    console.log('or its here now', arr)
+    
     return arr;
 }
 

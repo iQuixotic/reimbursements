@@ -29,11 +29,14 @@ class User {
       return x;
     }
 
-    static setOne(data) {
-      const x = data;
-      // const query = `UPDATE users
-      //                WHERE userid = ${data.id}
-      //                SET ${data[Object.keys]} = ${data.myRow}`
+    // instead of returning multiple times, i should be running for each on the controllers
+    static setOne(id) {
+      console.log(id)
+      // console.log('this is the data im getting', data)
+      const queryString = `UPDATE users SET ? WHERE userid = ${id}`;
+      // ${key} = '${data[key]}' WHERE userid = ${parseInt(data.userid)}`
+          // console.log('xxxxxxxxxxxxxxxxxxxxxxxxxxxxx', queryString);
+          return queryString;
     }
 
   // public getUser(id){

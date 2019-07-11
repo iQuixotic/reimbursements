@@ -41,14 +41,10 @@ module.exports = {
         const client = connection();   
         try {
             client.connect();
-            const data = await req.body;
-            const remem = keysFromObjs(req.body);
-            console.log(remem)
-                // const my = req.body[keys]
-                // console.log(my)
-            // const x = await client.query(db.setOne(data));
-            // console.log('data', data, 'x', x);
-            // return res.json({message: 'You did a good', rowsInserted: x.rows[0]});
+            // const mykeys = await keysFromObjs(req.body);
+            // console.log('mykeys are here', mykeys, 'my req.body here', req.body)
+            const x = await client.query(db.setOne(req.body.userid), req.body);
+            // return res.json({message: 'You did a good', rowsInserted: x});
         } catch (err) {
             throw err;
         } finally {

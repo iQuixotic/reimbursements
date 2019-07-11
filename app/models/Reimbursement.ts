@@ -1,5 +1,4 @@
 // const db = require('someConnection');
-
 class Reimbursement {
     private reimbursementId: number; // primary key
     private author: number;  // foreign key -> User, not null
