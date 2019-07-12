@@ -51,7 +51,6 @@ module.exports = {
         const client = connection();   
         try {
             client.connect();
-            console.log(parseInt(req.params.statusId))
 
             const joinFieldsOnArr = ['reimbursements.reimbursementid',
                 'reimbursements.author',  'reimbursements.status',
@@ -69,16 +68,29 @@ module.exports = {
             client.end();
         }
     },
-//     Select reimbursements.reimbursementid, reimbursements.author, 
-// reimbursements.status, reimbursementstatuses.status 
-// 	from reimbursements
-// 	left join reimbursementstatuses
-// 	on reimbursements.status = reimbursementstatuses.statusid
-// 	Order by reimbursementid;
 
     // get the status for a single reimbursement
     getAuthor: async (req: Request, res: Response) => {
-        console.log('come in and get the status.');
+        const client = connection();   
+        try {
+            client.connect();
+            console.log(parseInt(req.params.userId))
+
+            const joinFieldsOnArr = ['reimbursements.reimbursementid',
+                'reimbursements.author',  'reimbursements.status',
+                'reimbursementtypes.type']; 
+
+            const x = await client.query(
+                QueryMaker.getJoinedTbl('reimbursements', joinFieldsOnArr, 
+                'reimbursementtypes', 'reimbursements.status', 
+                'reimbursementtypes.typeid', parseInt(req.params.userId)));
+
+                console.log(x.rows);
+            return res.json(x.rows);
+        } catch (err) { throw err; } 
+        finally {
+            client.end();
+        }
     },
 
 }
