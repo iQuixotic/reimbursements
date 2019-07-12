@@ -9,21 +9,41 @@ class SQL_Query {
         arr.push(` ${keys[i-1]} = $${i}`)
         i--;
       }
+      console.log('here is the arr from printSets', arr)
       return arr;
     }
 
-    /*- - - - - - - - - Query String Makers - - - - - - - - -*/
-    
-    // generic get all 
-    static getAll(tableName) {
-      const x = (`SELECT * FROM ${tableName}`);
-      return x;
+    private static printDollars(num) {
+      let i = num+1, arr = [];
+      while (i>1) {
+        arr.push(`$${i}`)
+        i--;
+      }
+      console.log('here is the arr from PRINTdollarSigns', arr)
+      return arr;
     }
 
-    // generic get by id
+    /*- - - - - - - - - Query String Methods - - - - - - - - -*/
+    
+    // get all 
+    static getAll(tableName) {
+      return `SELECT * FROM ${tableName}`;
+    }
+
+    // get by id
     static getOne(tableName, queryKey) {
-      const x = `SELECT * FROM ${tableName} WHERE ${queryKey} = $1`;
-      return x;
+      return `SELECT * FROM ${tableName} WHERE ${queryKey} = $1`;
+    }
+
+    // insert a single db object
+    static insertOne(tableName, colNames) {
+      console.log('this is the colnames:', colNames, 'and this is the numOfFields', colNames.length-1);
+      const queryString = (
+        `INSERT INTO ${tableName} (${colNames.join(', ')}) 
+         VALUES (${this.printDollars(colNames.length-1).join(', ')};`
+      );
+      console.log('this shall be my queryString', queryString)
+      return queryString;
     }
    
     /* - - - - - - - - - - - - - ABOUT SET ONE  - - - - - - - - - - - - - 
@@ -34,7 +54,7 @@ class SQL_Query {
     - setOne will then return entire string to caller
     - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - */
 
-    // generic setOne
+    // edit a single row
     static setOne(tableName, whereField, numOfFields, keys) {
       const queryString = (
         `UPDATE ${tableName} 
@@ -42,9 +62,7 @@ class SQL_Query {
          WHERE ${whereField} = $1`
       );
           return queryString;
-    }
-
-    
+    }    
 }
 
 export default SQL_Query;

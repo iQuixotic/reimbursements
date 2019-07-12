@@ -3,7 +3,7 @@ const reimbursementController = require('../controllers/reimbursements-controlle
 
 // CRUD routes for reimbursements
 routerR.route('/')
-    .post(reimbursementController.add)
+    .post(reimbursementController.addOne)
     .patch(reimbursementController.update);
 
 // reimbursements is 1 to 1 with userId

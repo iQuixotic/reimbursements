@@ -19,8 +19,6 @@ class ReimbursementStatus {
   public setReimbursement(x){
     this.statusId = x.statusId;
     this.status = x.status;    
-
-    // db.somethingConnection(dbName, password, data)
   }
     
 }
