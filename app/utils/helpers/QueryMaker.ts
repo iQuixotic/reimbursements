@@ -1,4 +1,6 @@
-class Query {
+class SQL_Query {
+
+    /* - - - - - - - - Internal Query Helpers - - - - - - - - -*/
 
     // use num+1 to account for $1 at the id value
     private static printSets(num, keys) {
@@ -10,8 +12,8 @@ class Query {
       return arr;
     }
 
-    //-------------------------------------------------------------------------
-
+    /*- - - - - - - - - Query String Makers - - - - - - - - -*/
+    
     // generic get all 
     static getAll(tableName) {
       const x = (`SELECT * FROM ${tableName}`);
@@ -24,13 +26,14 @@ class Query {
       return x;
     }
    
-    /* - - - - - - - - - - - SET ONE  - - - - - - - - - - - - - - - - - -
+    /* - - - - - - - - - - - - - ABOUT SET ONE  - - - - - - - - - - - - - 
     - takes in 4 fields 
     - sets tableName and where field from within
     - calls printSets and passes the number of Fields and KeyNames
     - printSets returns an array like so: ['SomeKeyName = $2', 'SomeKeyName = $3]
     - setOne will then return entire string to caller
     - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - */
+
     // generic setOne
     static setOne(tableName, whereField, numOfFields, keys) {
       const queryString = (
@@ -44,4 +47,4 @@ class Query {
     
 }
 
-export default Query;
+export default SQL_Query;

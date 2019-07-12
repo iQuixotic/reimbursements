@@ -1,8 +1,7 @@
 import db from '../models/User';
 import { Request, Response } from 'express';
 import connection from '../config/connection';
-import keysFromObjs from '../utils/utility';
-import Query from '../utils/helpers/Query';
+import QueryMaker from '../utils/helpers/QueryMaker';
 
 module.exports = {
 
@@ -11,8 +10,7 @@ module.exports = {
         const client = connection();   
         try {                 
             client.connect();
-            // console.log(Query.getAll('users'))
-            const x = await client.query(Query.getAll('users'))
+            const x = await client.query(QueryMaker.getAll('users'))
             return res.json(x.rows);
         } catch (err) {
             throw err;
@@ -28,7 +26,7 @@ module.exports = {
             client.connect();
             const id = await req.params.id;
             const x = await client.query(
-                Query.getOne('users', 'userid'), [id]);
+                QueryMaker.getOne('users', 'userid'), [id]);
             return res.json(x.rows[0]);
         } catch (err) {
             throw err;
@@ -42,16 +40,15 @@ module.exports = {
         const client = connection();   
         try {
             client.connect();
-            // console.log('this is the request body', req.body);
+
+            // deconstruct req.body into 2 arrays
             const myKeys = [...Object.keys(req.body)];
             const myVals = [...Object.values(req.body)];
-            // await keysFromObjs(req.body);
-            console.log(myKeys)
-            console.log(myVals)
-            // myKeys.length -1 is to not count the id toward what will be incremented
-            console.log('this is the vals VALSSSSS', [...Object.values(req.body)])
+
+            // -1 to account for id 
             const x = await client.query(
-                Query.setOne('users', 'userid', myKeys.length-1, myKeys), myVals);
+                QueryMaker.setOne('users', 'userid', myKeys.length-1, myKeys),
+                 myVals);
             return res.json(x.rows[0]);
         } catch (err) {
             throw err;
