@@ -9,21 +9,33 @@ class SQL_Query {
         arr.push(` ${keys[i-1]} = $${i}`)
         i--;
       }
-      console.log('here is the arr from printSets', arr)
       return arr;
     }
 
+    // returns an array like: [ $3, $2, $1 ] 
     private static printDollars(num) {
       let i = num+1, arr = [];
-      while (i>1) {
+      while (i>0) {
         arr.push(`$${i}`)
         i--;
       }
-      console.log('here is the arr from PRINTdollarSigns', arr)
       return arr;
     }
 
     /*- - - - - - - - - Query String Methods - - - - - - - - -*/
+
+     // - - - - - CREATE - - - - - - 
+
+    // insert a single db object
+    static insertOne(tableName, colNames) {
+      const queryString = (
+        `INSERT INTO ${tableName} (${colNames.join(', ')}) 
+         VALUES (${this.printDollars(colNames.length-1).reverse().join(', ')});`
+      );
+      return queryString;
+    }
+
+    // - - - - - READ - - - - - - 
     
     // get all 
     static getAll(tableName) {
@@ -35,16 +47,7 @@ class SQL_Query {
       return `SELECT * FROM ${tableName} WHERE ${queryKey} = $1`;
     }
 
-    // insert a single db object
-    static insertOne(tableName, colNames) {
-      console.log('this is the colnames:', colNames, 'and this is the numOfFields', colNames.length-1);
-      const queryString = (
-        `INSERT INTO ${tableName} (${colNames.join(', ')}) 
-         VALUES (${this.printDollars(colNames.length-1).join(', ')};`
-      );
-      console.log('this shall be my queryString', queryString)
-      return queryString;
-    }
+    // - - - - - UPDATE - - - - - - 
    
     /* - - - - - - - - - - - - - ABOUT SET ONE  - - - - - - - - - - - - - 
     - takes in 4 fields 

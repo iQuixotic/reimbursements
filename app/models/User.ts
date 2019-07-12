@@ -18,26 +18,6 @@ class User {
         this.email = email;
         this.role = role;
     }
-
-    // static getAll() {
-    //   const x = 'SELECT * FROM users';
-    //   return x;
-    // }
-
-    // static getOne(id) {
-    //   const x = `SELECT * FROM users WHERE userid = ${id}`;
-    //   return x;
-    // }
-
-    // // instead of returning multiple times, i should be running for each on the controllers
-    // static setOne(id) {
-    //   console.log(id)
-    //   // console.log('this is the data im getting', data)
-    //   const queryString = `UPDATE users SET ? WHERE userid = ${id}`;
-    //   // ${key} = '${data[key]}' WHERE userid = ${parseInt(data.userid)}`
-    //       // console.log('xxxxxxxxxxxxxxxxxxxxxxxxxxxxx', queryString);
-    //       return queryString;
-    // }
     
 }
 

@@ -7,26 +7,22 @@ module.exports = {
     
     // CREATE a new db entry for a single reimbursement
     addOne: async (req: Request, res: Response) => {
-        console.log('i am trying my best')
-        // const client = connection();
-        // try {            
-        //     client.connect();
+        const client = connection();
+        try {            
+            client.connect();
 
-        //    // deconstruct req.body into 2 arrays
-        //     const myKeys = [...Object.keys(req.body)];
-        //     const myVals = [...Object.values(req.body)];
+           // deconstruct req.body into arrays like: [keys] [vals]
+            const myKeys = [...Object.keys(req.body)];
+            const myVals = [...Object.values(req.body)];
 
-        //     console.log('keys: ', myKeys, 'vals: ', myVals)
-        //     const x = await client.query(
-        //         QueryMaker.insertOne('reimbursements', myKeys),
-        //         myVals);
-        //         console.log(x, 'x')
-        //     return res.json(x.rows);
-        // } catch (err) {
-        //     throw err;
-        // } finally {
-        //     client.end();
-        // }
+            const x = await client.query(
+                QueryMaker.insertOne('reimbursements', myKeys),
+                myVals);
+            return res.json({message: 'You did such a good! Reimbursement added !!'});
+        } catch (err) { throw err; }
+             finally {
+            client.end();
+        }
       },
 
     // update a single reimbursement
