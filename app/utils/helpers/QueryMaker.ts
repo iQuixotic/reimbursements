@@ -47,6 +47,12 @@ class SQL_Query {
       return `SELECT * FROM ${tableName} WHERE ${queryKey} = $1`;
     }
 
+    static getJoinedTblValue(tableName, queryKey) {
+      // const x = `SELECT * FROM ${tableName} WHERE `;
+      // console.log(x)
+      // return x;
+    }
+
     // - - - - - UPDATE - - - - - - 
    
     /* - - - - - - - - - - - - - ABOUT SET ONE  - - - - - - - - - - - - - 
@@ -66,6 +72,7 @@ class SQL_Query {
       );
           return queryString;
     }    
+
 }
 
 export default SQL_Query;

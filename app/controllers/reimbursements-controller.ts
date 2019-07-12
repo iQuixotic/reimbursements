@@ -27,7 +27,6 @@ module.exports = {
 
     // update a single reimbursement
     update: async (req: Request, res: Response) => {
-        console.log('come in and get the update.');
         const client = connection();   
         try {
             client.connect();
