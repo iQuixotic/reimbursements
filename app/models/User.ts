@@ -19,50 +19,25 @@ class User {
         this.role = role;
     }
 
-    static getAll() {
-      const x = 'SELECT * FROM users';
-      return x;
-    }
+    // static getAll() {
+    //   const x = 'SELECT * FROM users';
+    //   return x;
+    // }
 
-    static getOne(id) {
-      const x = `SELECT * FROM users WHERE userid = ${id}`;
-      return x;
-    }
+    // static getOne(id) {
+    //   const x = `SELECT * FROM users WHERE userid = ${id}`;
+    //   return x;
+    // }
 
-    // instead of returning multiple times, i should be running for each on the controllers
-    static setOne(id) {
-      console.log(id)
-      // console.log('this is the data im getting', data)
-      const queryString = `UPDATE users SET ? WHERE userid = ${id}`;
-      // ${key} = '${data[key]}' WHERE userid = ${parseInt(data.userid)}`
-          // console.log('xxxxxxxxxxxxxxxxxxxxxxxxxxxxx', queryString);
-          return queryString;
-    }
-
-  // public getUser(id){
-  //   const userData = {
-  //       userId: this.userId,
-  //       username : this.username,
-  //       password : this.password,
-  //       firstName : this.firstName,
-  //       lastName: this.lastName,
-  //       email : this.email,
-  //       role: this.role
-  //   }
-  //   return userData;
-  // }
-
-  // public setUser(user){
-  //   this.userId = user.userId;
-  //   this.username = user.username;
-  //   this.password = user.password;
-  //   this.firstName = user.firstName;
-  //   this.lastName = user.lastName;
-  //   this.email = user.email;
-    // this.role = user.role;
-
-    // db.somethingConnection(dbName, password, data)
-  // }
+    // // instead of returning multiple times, i should be running for each on the controllers
+    // static setOne(id) {
+    //   console.log(id)
+    //   // console.log('this is the data im getting', data)
+    //   const queryString = `UPDATE users SET ? WHERE userid = ${id}`;
+    //   // ${key} = '${data[key]}' WHERE userid = ${parseInt(data.userid)}`
+    //       // console.log('xxxxxxxxxxxxxxxxxxxxxxxxxxxxx', queryString);
+    //       return queryString;
+    // }
     
 }
 

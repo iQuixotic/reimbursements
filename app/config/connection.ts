@@ -1,8 +1,8 @@
-import {Client} from 'pg';
+import { Pool } from 'pg';
 import SECRET from './secret';
 
 const connection = () => {
-    return new Client({
+    return new Pool ({
         user: SECRET.DB_USER,
         password:SECRET.DB_PASSWORD,
         host: SECRET.DB_HOST,

@@ -5,10 +5,9 @@ const keysFromObjs =(obj) => {
     // iterate over keys, but ignore the ids
     for(let keys in obj)  
         if(keys !== 'userid') arr.push(keys);
-    
-    console.log('or its here now', arr)
-    
+        
     return arr;
+
 }
 
 export default keysFromObjs;
