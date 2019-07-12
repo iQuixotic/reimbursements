@@ -28,6 +28,23 @@ module.exports = {
     // update a single reimbursement
     update: async (req: Request, res: Response) => {
         console.log('come in and get the update.');
+        const client = connection();   
+        try {
+            client.connect();
+
+            // deconstruct req.body into 2 arrays
+            const myKeys = [...Object.keys(req.body)];
+            const myVals = [...Object.values(req.body)];
+
+            // -1 to account for id 
+            const x = await client.query(
+                QueryMaker.setOne('reimbursements', 'reimbursementid', myKeys.length-1, myKeys),
+                 myVals);
+            return res.json({message: 'I have done your bidding. Reimbursement Updated'});
+        } catch (err) { throw err; } 
+        finally {
+            client.end();
+        }
     },
 
     // get the author for a single reimbursement
