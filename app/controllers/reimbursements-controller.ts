@@ -47,12 +47,37 @@ module.exports = {
     },
 
     // get the author for a single reimbursement
-    getAuthor: async (req: Request, res: Response) => {
-        console.log('come in and get the author.');
+    getStatus: async (req: Request, res: Response) => {
+        const client = connection();   
+        try {
+            client.connect();
+            console.log(parseInt(req.params.statusId))
+
+            const joinFieldsOnArr = ['reimbursements.reimbursementid',
+                'reimbursements.author',  'reimbursements.status',
+                'reimbursementstatuses.status' ]; 
+
+            const x = await client.query(
+                QueryMaker.getJoinedTbl('reimbursements', joinFieldsOnArr, 
+                'reimbursementstatuses', 'reimbursements.status', 
+                'reimbursementstatuses.statusid', parseInt(req.params.statusId)));
+
+                console.log(x.rows);
+            return res.json(x.rows);
+        } catch (err) { throw err; } 
+        finally {
+            client.end();
+        }
     },
+//     Select reimbursements.reimbursementid, reimbursements.author, 
+// reimbursements.status, reimbursementstatuses.status 
+// 	from reimbursements
+// 	left join reimbursementstatuses
+// 	on reimbursements.status = reimbursementstatuses.statusid
+// 	Order by reimbursementid;
 
     // get the status for a single reimbursement
-    getStatus: async (req: Request, res: Response) => {
+    getAuthor: async (req: Request, res: Response) => {
         console.log('come in and get the status.');
     },
 

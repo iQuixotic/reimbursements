@@ -47,11 +47,25 @@ class SQL_Query {
       return `SELECT * FROM ${tableName} WHERE ${queryKey} = $1`;
     }
 
-    static getJoinedTblValue(tableName, queryKey) {
-      // const x = `SELECT * FROM ${tableName} WHERE `;
-      // console.log(x)
-      // return x;
+    // join 2 tables on a certain result set
+    static getJoinedTbl(tableName, fields, secondTable, tblKey1, tblKey2, id) {
+      const queryString = (
+       `SELECT ${fields.join(', ')} 
+        FROM ${tableName} 
+        LEFT JOIN ${secondTable}
+        ON ${tblKey1} = ${tblKey2}
+        WHERE ${tblKey2} = ${id}`
+      );
+      console.log(queryString)
+      return queryString;
     }
+
+//     Select reimbursements.reimbursementid, reimbursements.author, 
+// reimbursements.status, reimbursementstatuses.status 
+// 	from reimbursements
+// 	left join reimbursementstatuses
+// 	on reimbursements.status = reimbursementstatuses.statusid
+// 	Order by reimbursementid;
 
     // - - - - - UPDATE - - - - - - 
    
