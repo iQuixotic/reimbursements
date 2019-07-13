@@ -4,55 +4,56 @@ CREATE DATABASE credits;
 
 -- ++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
 
--- for creating the users table
-DROP TABLE IF EXISTS users;
-CREATE TABLE users (
-  userId SERIAL PRIMARY KEY,
-  password varchar(255) NOT NULL,
-  firstName varchar(255) NOT NULL,
-  lastName varchar(255) NOT NULL,
-  email varchar(255) NOT NULL,
-  role varchar(255) NOT NULL
-);
-
 -- for creating the roles table only
 DROP TABLE IF EXISTS roles;
 CREATE TABLE roles (
-  roleId SERIAL PRIMARY KEY,
+  _id SERIAL PRIMARY KEY,
   role varchar(255) NOT NULL
 );
 
--- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
--- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
-
-  -- for creating the reimbursements table
-DROP TABLE IF EXISTS reimbursements;
-CREATE TABLE reimbursements (
-  reimbursementId SERIAL PRIMARY KEY,
-  author varchar(255) NOT NULL,
-  amount int NOT NULL,
-  dateSubmitted int NOT NULL,
-  dateResolved int NOT NULL,
-  description  varchar(255) NOT NULL,
-  resolver int NOT NULL,
-  status int NOT NULL,
-  type int NOT NULL
+-- for creating the users table
+DROP TABLE IF EXISTS users;
+CREATE TABLE users (
+  _id SERIAL PRIMARY KEY,
+  password VARCHAR(255) NOT NULL,
+  first_name VARCHAR(255) NOT NULL,
+  last_name VARCHAR(255) NOT NULL,
+  email VARCHAR(255) NOT NULL,
+  role_id int references roles(_id) NOT NULL
 );
 
--- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - 
+-- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
+-- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
+
 
   -- for creating the reimbursementStatuses table
-DROP TABLE IF EXISTS reimbursementStatuses;
-CREATE TABLE reimbursementStatuses (
-  statusId SERIAL PRIMARY KEY,
+DROP TABLE IF EXISTS reimbursement_statuses;
+CREATE TABLE reimbursement_statuses (
+  _id SERIAL PRIMARY KEY,
   status varchar(255) NOT NULL
 );
 
 -- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - 
 
   -- for creating the reimbursementTypes table
-DROP TABLE IF EXISTS reimbursementTypes;
-CREATE TABLE reimbursementTypes (
-  typeId SERIAL PRIMARY KEY,
+DROP TABLE IF EXISTS reimbursement_types;
+CREATE TABLE reimbursement_types (
+  _id SERIAL PRIMARY KEY,
   type varchar(255) NOT NULL
+);
+
+-- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - 
+
+  -- for creating the reimbursements table
+DROP TABLE IF EXISTS reimbursements;
+CREATE TABLE reimbursements (
+  _id SERIAL PRIMARY KEY,
+  author references users(_id),
+  amount int NOT NULL,
+  date_submitted date NOT NULL,
+  date_resolved date,
+  description  varchar(255) NOT NULL,
+  resolver int references users(_id),
+  status int references reimbursement_statuses(_id),
+  type int references reimbursement_types(_id),
 );
