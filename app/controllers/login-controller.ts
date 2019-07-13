@@ -1,4 +1,4 @@
-import db from '../models/User';
+import db from '../classes/models/User';
 import { Request, Response } from 'express';
 import connection from '../config/connection';
 

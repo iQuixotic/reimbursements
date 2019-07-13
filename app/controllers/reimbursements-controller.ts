@@ -1,7 +1,7 @@
 // import db from '../models/Reimbursement';
 import { Request, Response } from 'express';
 import connection from '../config/connection';
-import QueryMaker from '../utils/helpers/QueryMaker';
+import QueryMaker from '../classes/mixins/QueryMaker';
 
 module.exports = {
     

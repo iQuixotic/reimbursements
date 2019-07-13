@@ -1,4 +1,4 @@
-class SQL_Query {
+class QueryMaker {
 
     /* - - - - - - - - Internal Query Helpers - - - - - - - - -*/
 
@@ -89,4 +89,4 @@ class SQL_Query {
 
 }
 
-export default SQL_Query;
+export default QueryMaker;
