@@ -12,7 +12,7 @@ module.exports = {
             const myKeys = [...Object.keys(req.body)];
             const myVals = [...Object.values(req.body)];
 
-            const x = await db.query(
+            await db.query(
                 QueryMaker.insertOne('reimbursements', myKeys),
                 myVals);
             return res.json({message: 'You did such a good! Reimbursement added !!'});
@@ -30,7 +30,7 @@ module.exports = {
 
             // -1 to account for id 
             const x = await db.query(
-                QueryMaker.setOne('reimbursements', 'reimbursementid', myKeys.length-1, myKeys),
+                QueryMaker.setOne('reimbursements', '_id', myKeys.length-1, myKeys),
                  myVals);
             return res.json({message: 'I have done your bidding. Reimbursement Updated'});
         } catch (err) { 
@@ -42,14 +42,14 @@ module.exports = {
     getStatus: async (req: Request, res: Response) => {
         try {
 
-            const joinFieldsOnArr = ['reimbursements.reimbursementid',
+            const joinFieldsOnArr = ['reimbursements._id',
                 'reimbursements.author',  'reimbursements.status',
-                'reimbursementstatuses.status' ]; 
+                'reimbursement_statuses.status' ]; 
 
             const x = await db.query(
                 QueryMaker.getJoinedTbl('reimbursements', joinFieldsOnArr, 
-                'reimbursementstatuses', 'reimbursements.status', 
-                'reimbursementstatuses.statusid', parseInt(req.params.statusId)));
+                'reimbursement_statuses', 'reimbursements.status', 
+                'reimbursement_statuses._id', parseInt(req.params.id)));
             return res.json(x.rows);
         } catch (err) { 
             throw err; 
@@ -60,14 +60,14 @@ module.exports = {
     // get the status for a single reimbursement
     getAuthor: async (req: Request, res: Response) => {
         try {
-            const joinFieldsOnArr = ['reimbursements.reimbursementid',
+            const joinFieldsOnArr = ['reimbursements._id',
                 'reimbursements.author',  'reimbursements.status',
-                'reimbursementtypes.type']; 
+                'reimbursement_types.type']; 
 
             const x = await db.query(
                 QueryMaker.getJoinedTbl('reimbursements', joinFieldsOnArr, 
-                'reimbursementtypes', 'reimbursements.status', 
-                'reimbursementtypes.typeid', parseInt(req.params.userId)));
+                'reimbursement_types', 'reimbursements.status', 
+                'reimbursement_types._id', parseInt(req.params.id)));
 
             return res.json(x.rows);
         } catch (err) { 

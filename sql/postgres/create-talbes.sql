@@ -48,7 +48,7 @@ CREATE TABLE reimbursement_types (
 DROP TABLE IF EXISTS reimbursements;
 CREATE TABLE reimbursements (
   _id SERIAL PRIMARY KEY,
-  author references users(_id),
+  author int references users(_id),
   amount int NOT NULL,
   date_submitted date NOT NULL,
   date_resolved date,
