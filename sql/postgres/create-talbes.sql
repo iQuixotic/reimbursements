@@ -11,16 +11,6 @@ CREATE TABLE roles (
   role varchar(255) NOT NULL
 );
 
--- for creating the users table
-DROP TABLE IF EXISTS users;
-CREATE TABLE users (
-  _id SERIAL PRIMARY KEY,
-  password VARCHAR(255) NOT NULL,
-  first_name VARCHAR(255) NOT NULL,
-  last_name VARCHAR(255) NOT NULL,
-  email VARCHAR(255) NOT NULL,
-  role_id int references roles(_id) NOT NULL
-);
 
 -- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
 -- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
@@ -56,4 +46,16 @@ CREATE TABLE reimbursements (
   resolver int references users(_id),
   status int references reimbursement_statuses(_id),
   type int references reimbursement_types(_id),
+);
+
+-- for creating the users table
+DROP TABLE IF EXISTS users;
+CREATE TABLE users (
+  _id SERIAL PRIMARY KEY,
+  username varchar(255) NOT NULL,
+  password VARCHAR(255) NOT NULL,
+  first_name VARCHAR(255) NOT NULL,
+  last_name VARCHAR(255) NOT NULL,
+  email VARCHAR(255) NOT NULL,
+  role_id int references roles(_id) NOT NULL
 );

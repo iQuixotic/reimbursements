@@ -5,6 +5,7 @@ import db from '../config/connection';
 import QueryMaker from '../classes/helpers/QueryMaker';
 import User from '../classes/models/User';
 import bcrypt from 'bcrypt';
+import CHECK from '../utils/checkers';
 
 module.exports = {
     
@@ -15,6 +16,8 @@ module.exports = {
             if(err) {
                 res.sendStatus(403);
             } else {
+                // console.log(req.body)
+        if(CHECK.isFinancialManager()) {
                 try {                 
                     const userArr = [];
                     const x = await db.query(QueryMaker.getAll('users'))
@@ -22,13 +25,13 @@ module.exports = {
                         const user = new User(el);  
                         userArr.push(user)              
                     });
-                    console.log('this is the x.rows', x.rows);
-                    console.log('this is the userArr', userArr);
                     return res.json(x.rows);
                 } catch (err) {
                     throw err;
                 }
-                // res.json({message: 'Ok son...', authData})
+            } else{
+                res.json({message: 'Only Finance managers may view all users'});
+            }
             }
         });
         
@@ -36,35 +39,44 @@ module.exports = {
 
     // // get a single user by id
     getOne: async (req: Request, res: Response) => {
-        try {
-            const id = await req.params.id;
-            const x = await db.query(
-                QueryMaker.getOne('users', '_id'), [id]);
-            const user = await new User(x.rows[0]);
-            console.log('this is the user for getOne', user);
-            return res.json(user);
-        } catch (err) {
-            throw err;
-        } 
+        if(CHECK.isFinancialManager() || CHECK.isSelfReferencial()) {
+                try {
+                    const id = await req.params.id;
+                    const x = await db.query(
+                        QueryMaker.getOne('users', '_id'), [id]);
+                    const user = await new User(x.rows[0]);
+                    console.log('this is the user for getOne', user);
+                    return res.json(user);
+                } catch (err) {
+                    throw err;
+                } 
+            } else {
+                res.json({message: 'Only Finance managers or ticket holders may view users in this way.'});
+            }
     },
 
     // update a single user at any field
     update: async (req: Request, res: Response) => {
-        try {
-            // deconstruct req.body into 2 arrays
-            const myKeys = [...Object.keys(req.body)];
-            const myVals = [...Object.values(req.body)];
-
-            // -1 to account for id 
-            const x = await db.query(
-                QueryMaker.setOne('users', '_id', myKeys.length-1, myKeys),
-                 myVals);
-            const user = await new User(x.rows[0]);
-            console.log('this is what a     USER    SMELLS  LIKE: ', user )
-            return res.json(user);
-        } catch (err) {
-            throw err;
-        } 
+        if(CHECK.isAdmin()) {
+            try {
+                // deconstruct req.body into 2 arrays
+                const myKeys = [...Object.keys(req.body)];
+                const myVals = [...Object.values(req.body)];
+    
+                // -1 to account for id 
+                const x = await db.query(
+                    QueryMaker.setOne('users', '_id', myKeys.length-1, myKeys),
+                     myVals);
+                const user = await new User(x.rows[0]);
+                console.log('this is what a     USER    SMELLS  LIKE: ', user )
+                return res.json(user);
+            } catch (err) {
+                throw err;
+            } 
+        } else {
+            res.json({message: "Only admins may update a user."})
+        }
+       
     },
 
     // register a new user

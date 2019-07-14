@@ -4,11 +4,11 @@ INSERT INTO roles VALUES(2, 'admin');
 INSERT INTO roles VALUES(3, 'default user');
 
 -- for seeding the user table
-INSERT INTO users VALUES (1, 'tomtom', 'Larry', 'Cripsmith', 'fromto@yahoo.com', 2);
-INSERT INTO users VALUES (2, 'timtim', 'Crommery', 'Gobbard', 'electionguy_434@yahoo.com', 2);
-INSERT INTO users VALUES (3, 'tisktisk', 'Terija', 'Tsu', 'secretsquirrel96@yahoo.com', 3);
-INSERT INTO users VALUES (4, 'patpat', 'Patrick', 'Byrde', 'patkumuji@yahoo.com', 3);
-INSERT INTO users VALUES (5, 'sarasara', 'Shirley', 'Johnson', 'shirleyj@yahoo.com', 1);
+INSERT INTO users VALUES (1, 'user1', 'tomtom', 'Larry', 'Cripsmith', 'fromto@yahoo.com', 2);
+INSERT INTO users VALUES (2, 'user2', 'timtim', 'Crommery', 'Gobbard', 'electionguy_434@yahoo.com', 2);
+INSERT INTO users VALUES (3, 'user3', 'tisktisk', 'Terija', 'Tsu', 'secretsquirrel96@yahoo.com', 3);
+INSERT INTO users VALUES (4, '004', 'patpat', 'Patrick', 'Byrde', 'patkumuji@yahoo.com', 3);
+INSERT INTO users VALUES (5, 'sandra', 'sarasara', 'Shirley', 'Johnson', 'shirleyj@yahoo.com', 1);
 
 
 INSERT INTO reimbursement_statuses VALUES(1, 'pending');

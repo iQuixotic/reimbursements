@@ -2,6 +2,7 @@
 import { Request, Response } from 'express';
 import db from '../config/connection';
 import QueryMaker from '../classes/helpers/QueryMaker';
+import CHECK from '../utils/checkers';
 
 module.exports = {
     
@@ -23,6 +24,7 @@ module.exports = {
 
     // update a single reimbursement
     update: async (req: Request, res: Response) => {
+        if(CHECK.isFinancialManager()) {
         try {
             // deconstruct req.body into 2 arrays like: [keys] [vals]
             const myKeys = [...Object.keys(req.body)];
@@ -36,29 +38,34 @@ module.exports = {
         } catch (err) { 
             throw err; 
         } 
+    }
     },
 
-    // get the author for a single reimbursement
+    // get by status
     getStatus: async (req: Request, res: Response) => {
-        try {
+        if(CHECK.isFinancialManager()) {
 
-            const joinFieldsOnArr = ['reimbursements._id',
-                'reimbursements.author',  'reimbursements.status',
-                'reimbursement_statuses.status' ]; 
+            try {
 
-            const x = await db.query(
-                QueryMaker.getJoinedTbl('reimbursements', joinFieldsOnArr, 
-                'reimbursement_statuses', 'reimbursements.status', 
-                'reimbursement_statuses._id', parseInt(req.params.id)));
-            return res.json(x.rows);
-        } catch (err) { 
-            throw err; 
-        } 
+                const joinFieldsOnArr = ['reimbursements._id',
+                    'reimbursements.author',  'reimbursements.status',
+                    'reimbursement_statuses.status' ]; 
+
+                const x = await db.query(
+                    QueryMaker.getJoinedTbl('reimbursements', joinFieldsOnArr, 
+                    'reimbursement_statuses', 'reimbursements.status', 
+                    'reimbursement_statuses._id', parseInt(req.params.id)));
+                return res.json(x.rows);
+            } catch (err) { 
+                throw err; 
+            } 
+    }
       
     },
 
-    // get the status for a single reimbursement
+    // get by author
     getAuthor: async (req: Request, res: Response) => {
+        if(CHECK.isFinancialManager()) {
         try {
             const joinFieldsOnArr = ['reimbursements._id',
                 'reimbursements.author',  'reimbursements.status',
@@ -73,6 +80,7 @@ module.exports = {
         } catch (err) { 
             throw err; 
         } 
+    }
      
     },
 
