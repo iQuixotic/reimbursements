@@ -11,19 +11,27 @@ module.exports = {
 
     // get all of the users
     getAll: async (req: Request, res: Response) => {
-        jwt.verify(req.token, 'secretkey', (err, authData) => {
+        jwt.verify(req.token, 'secretkey', async (err, authData) => {
             if(err) {
                 res.sendStatus(403);
             } else {
-                res.json({message: 'Ok son...', authData})
+                try {                 
+                    const userArr = [];
+                    const x = await db.query(QueryMaker.getAll('users'))
+                    x.rows.forEach(el => {
+                        const user = new User(el);  
+                        userArr.push(user)              
+                    });
+                    console.log('this is the x.rows', x.rows);
+                    console.log('this is the userArr', userArr);
+                    return res.json(x.rows);
+                } catch (err) {
+                    throw err;
+                }
+                // res.json({message: 'Ok son...', authData})
             }
         });
-        try {                 
-            const x = await db.query(QueryMaker.getAll('users'))
-            return res.json(x.rows);
-        } catch (err) {
-            throw err;
-        }
+        
       },
 
     // // get a single user by id
@@ -32,13 +40,15 @@ module.exports = {
             const id = await req.params.id;
             const x = await db.query(
                 QueryMaker.getOne('users', '_id'), [id]);
-            return res.json(x.rows[0]);
+            const user = await new User(x.rows[0]);
+            console.log('this is the user for getOne', user);
+            return res.json(user);
         } catch (err) {
             throw err;
         } 
     },
 
-    // // update a single user at any field
+    // update a single user at any field
     update: async (req: Request, res: Response) => {
         try {
             // deconstruct req.body into 2 arrays
@@ -49,7 +59,9 @@ module.exports = {
             const x = await db.query(
                 QueryMaker.setOne('users', '_id', myKeys.length-1, myKeys),
                  myVals);
-            return res.json(x.rows[0]);
+            const user = await new User(x.rows[0]);
+            console.log('this is what a     USER    SMELLS  LIKE: ', user )
+            return res.json(user);
         } catch (err) {
             throw err;
         } 
@@ -66,11 +78,11 @@ module.exports = {
                         error: err
                     });
                 } else {
-                    const user = new User(
-                        req.body.username, hash,                       
-                        req.body.first_name, req.body.last_name, 
-                        req.body.email, req.body.role_id
-                    );
+                    // const user = new User(
+                    //     req.body.username, hash,                       
+                    //     req.body.first_name, req.body.last_name, 
+                    //     req.body.email, req.body.role_id
+                    // );
                     // user.save();
                 }
             }), 

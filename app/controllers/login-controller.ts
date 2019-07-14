@@ -14,7 +14,7 @@ module.exports = {
             email: 'trimer@some.com'
         }
 
-        jwt.sign({user}, 'secretkey', {expiresIn: '30s'}, (err, token) => {
+        jwt.sign({user}, 'secretkey', {expiresIn: '12h'}, (err, token) => {
             console.log(token)
            res.json({
                token

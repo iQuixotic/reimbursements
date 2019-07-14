@@ -8,15 +8,17 @@ class User {
     private email: string; // not null
     private role_id: Role; // not null
 
-    constructor(username, password, firstName,
-                lastName, email, role) {                  
-        // this._id = userId;
-        this.username = username;
-        this.password = password;
-        this.first_name = firstName;
-        this.last_name =lastName;
-        this.email = email;
-        this.role_id = role;
+    constructor(obj) {      
+        if(!obj) {
+            return;   
+        }          
+        this._id = obj._id;
+        this.username = obj.username;
+        this.password = obj.password;
+        this.first_name = obj.first_name;
+        this.last_name = obj.last_name;
+        this.email = obj.email;
+        this.role_id = obj.role_id;
     }
     
 }
