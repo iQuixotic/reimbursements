@@ -1,22 +1,23 @@
+import Role from '../models/Role';
 class User {
-    private userId: number; // primary key
+    private _id: number; // primary key
     private username: string; // not null, unique
     private password: string; // not null
-    private firstName: string; // not null
-    private lastName: string; // not null
+    private first_name: string; // not null
+    private last_name: string; // not null
     private email: string; // not null
-    private role: number; // not null
+    private role_id: Role; // not null
 
     constructor(userId, username, password, firstName,
                 lastName, email, role) {
                   
-        this.userId = userId;
+        this._id = userId;
         this.username = username;
         this.password = password;
-        this.firstName = firstName;
-        this.lastName =lastName;
+        this.first_name = firstName;
+        this.last_name =lastName;
         this.email = email;
-        this.role = role;
+        this.role_id = role;
     }
     
 }

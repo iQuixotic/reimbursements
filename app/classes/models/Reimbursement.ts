@@ -1,58 +1,29 @@
-// const db = require('someConnection');
+import ReimbursementType from '../models/Reimbursement-type';
+import ReimbursementStatus from '../models/Reimbursement-status';
 class Reimbursement {
-    private reimbursementId: number; // primary key
+    private reimbursement_id: number; // primary key
     private author: number;  // foreign key -> User, not null
     private amount: number;  // not null
-    private dateSubmitted: number; // not null
-    private dateResolved: number;
+    private date_submitted: number; // not null
+    private date_resolved: number;
     private description: string; // not null
     private resolver: number; // foreign key -> User
-    private status: number; // foreign ey -> ReimbursementStatus, not null
-    private type: number; // foreign key -> ReimbursementType
+    private status_id: ReimbursementStatus; // foreign ey -> ReimbursementStatus, not null
+    private type_id: ReimbursementType; // foreign key -> ReimbursementType
 
-    // constructor(reimbursementId, author, amount,
-    //             dateSubmitted, dateResolved, description,
-    //             resolver, status, type) {
-    //     this.reimbursementId = reimbursementId;
-    //     this.author = author;
-    //     this.amount = amount;
-    //     this.dateSubmitted = dateSubmitted;
-    //     this.dateResolved = dateResolved;
-    //     this.description = description;
-    //     this.resolver = resolver;
-    //     this.status = status;
-    //     this.type = type;
-    // }
-  public getReimbursement(id) {
-    const reimbursementData = {
-        reimbursementId: this.reimbursementId,
-        author: this.author,
-        amount: this.amount,
-        dateSubmitted: this.dateSubmitted,
-        dateResolved: this.dateResolved,
-        description: this.description,
-        resolver: this.resolver,
-        status: this.status, 
-        type: this.type
+    constructor(reimbursementId, author, amount,
+                dateSubmitted, dateResolved, description,
+                resolver, status, type) {
+        this.reimbursement_id = reimbursementId;
+        this.author = author;
+        this.amount = amount;
+        this.date_submitted = dateSubmitted;
+        this.date_resolved = dateResolved;
+        this.description = description;
+        this.resolver = resolver;
+        this.status_id = status;
+        this.type_id = type;
     }
-    return reimbursementData;
-  }
-
-  public setReimbursement(x){
-    this.reimbursementId = x.reimbursementId;
-    this.author = x.author;
-    this.amount = x.amount;
-    this.dateSubmitted = x.dateSubmitted;
-    this.dateResolved = x.dateResolved;
-    this.description = x.description;
-    this.resolver = x.resolver;
-    this.status = x.status;
-    this.type = x.type;
-  }
-
-  static set reimbursement(data) {
-
-  }
     
 }
 

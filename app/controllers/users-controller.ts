@@ -3,6 +3,7 @@ import { Request, Response } from 'express';
 import jwt from 'jsonwebtoken';
 import db from '../config/connection';
 import QueryMaker from '../classes/helpers/QueryMaker';
+import User from '../classes/models/User';
 
 module.exports = {
     
