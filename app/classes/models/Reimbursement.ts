@@ -23,8 +23,7 @@ class Reimbursement {
         this.resolver = resolver;
         this.status_id = status;
         this.type_id = type;
-    }
-    
+    }    
 }
 
 export default Reimbursement;

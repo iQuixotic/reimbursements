@@ -24,11 +24,11 @@ module.exports = {
     // update a single reimbursement
     update: async (req: Request, res: Response) => {
         try {
-            // deconstruct req.body into 2 arrays
+            // deconstruct req.body into 2 arrays like: [keys] [vals]
             const myKeys = [...Object.keys(req.body)];
             const myVals = [...Object.values(req.body)];
 
-            // -1 to account for id 
+            // -1 to account for id not present
             const x = await db.query(
                 QueryMaker.setOne('reimbursements', '_id', myKeys.length-1, myKeys),
                  myVals);

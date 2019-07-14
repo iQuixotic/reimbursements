@@ -59,14 +59,7 @@ class QueryMaker {
       console.log(queryString)
       return queryString;
     }
-
-//     Select reimbursements.reimbursementid, reimbursements.author, 
-// reimbursements.status, reimbursementstatuses.status 
-// 	from reimbursements
-// 	left join reimbursementstatuses
-// 	on reimbursements.status = reimbursementstatuses.statusid
-// 	Order by reimbursementid;
-
+    
     // - - - - - UPDATE - - - - - - 
    
     /* - - - - - - - - - - - - - ABOUT SET ONE  - - - - - - - - - - - - - 

@@ -4,6 +4,7 @@ import jwt from 'jsonwebtoken';
 import db from '../config/connection';
 import QueryMaker from '../classes/helpers/QueryMaker';
 import User from '../classes/models/User';
+import bcrypt from 'bcrypt';
 
 module.exports = {
     
@@ -57,7 +58,27 @@ module.exports = {
     // register a new user
     addOne: async (req: Request, res: Response) => {
         try {
+            console.log(req.body)
 
+            bcrypt.hash(req.body.password, 10, (err, hash) => {
+                if(err) {
+                    return res.status(500).json({
+                        error: err
+                    });
+                } else {
+                    const user = new User(
+                        req.body.username, hash,                       
+                        req.body.first_name, req.body.last_name, 
+                        req.body.email, req.body.role_id
+                    );
+                    // user.save();
+                }
+            }), 
+            await console.log(res.json())
+            await res.status(201).json({
+               message: `New user ${req.body.username} created.`
+            })
+        
         } catch (err) {
             throw err;
         } 

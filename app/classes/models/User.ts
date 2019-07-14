@@ -8,10 +8,9 @@ class User {
     private email: string; // not null
     private role_id: Role; // not null
 
-    constructor(userId, username, password, firstName,
-                lastName, email, role) {
-                  
-        this._id = userId;
+    constructor(username, password, firstName,
+                lastName, email, role) {                  
+        // this._id = userId;
         this.username = username;
         this.password = password;
         this.first_name = firstName;
