@@ -8,7 +8,6 @@ import bcrypt from 'bcrypt';
 import CHECK from '../utils/checkers';
 
 module.exports = {
-    
 
     // get all of the users
     getAll: async (req: Request, res: Response) => {
@@ -16,8 +15,9 @@ module.exports = {
             if(err) {
                 res.sendStatus(403);
             } else {
-                // console.log(req.body)
-        if(CHECK.isFinancialManager()) {
+                console.log(authData)
+                
+            if(authData.role_id === 1) {
                 try {                 
                     const userArr = [];
                     const x = await db.query(QueryMaker.getAll('users'))

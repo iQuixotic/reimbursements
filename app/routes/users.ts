@@ -1,11 +1,11 @@
 // import { verify } from "crypto";
-import verifyToken from '../utils/logins/JWT';
+// import verifyToken from '../utils/logins/JWT';
 const routerU = require('express').Router();
 const usersController = require('../controllers/users-controller.ts');
 
 // CRUD for users info
 routerU.route('/')
-    .get(verifyToken, usersController.getAll)
+    .get(usersController.getAll)
     .patch(usersController.update);
 
 routerU.route('/:id')

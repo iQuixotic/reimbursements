@@ -15,12 +15,16 @@ module.exports = {
             await db.query(`select * from users where (username, password) = ($1, $2);`, [req.body.username, req.body.password])      
             console.log(req.body)
             const response = await db.query(`select role_id from users where (username, password) = ($1, $2);`, [req.body.username, req.body.password])
-            console.log('THIS IS THE ROLE ID PLEASE......', response.rows[0].role_id)
-            const x = await CHECK.setUID(response.rows[0].role_id);
-            console.log(x)
+            // console.log('THIS IS THE ROLE ID PLEASE......', response.rows[0].role_id)
+            // const x = await CHECK.setUID(response.rows[0].role_id);
+            // console.log(x)
             const user = await new User(req.body) //  QueryMaker.insertOne('reimbursements', myKeys),
             
-            jwt.sign({user: user}, 'secretkey', {expiresIn: '12h'}, (err, token) => {
+            jwt.sign({ 
+                _id: req.body._id, username: req.body.username, 
+                password: req.body.password, role_id: response.rows[0].role_id }, 
+                'secretkey', {expiresIn: '12h'}, (err, token) => {
+                    
                 console.log(token)
                res.json({
                    token
