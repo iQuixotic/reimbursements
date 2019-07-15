@@ -12,10 +12,7 @@ module.exports = {
     // get all of the users
     getAll: async (req: Request, res: Response) => {
         jwt.verify(req.token, 'secretkey', async (err, authData) => {
-            if(err) {
-                res.sendStatus(403);
-            } else {
-                console.log(authData)
+            if(err)  res.sendStatus(403);
                 
             if(authData.role_id === 1) {
                 try {                 
@@ -32,14 +29,16 @@ module.exports = {
             } else{
                 res.json({message: 'Only Finance managers may view all users'});
             }
-            }
+            
         });
         
       },
 
     // // get a single user by id
     getOne: async (req: Request, res: Response) => {
-        if(CHECK.isFinancialManager() || CHECK.isSelfReferencial()) {
+        jwt.verify(req.token, 'secretkey', async (err, authData) => {
+            if(err)  res.sendStatus(403);
+        if(authData.role_id === 1 || CHECK.isSelfReferencial()) {
                 try {
                     const id = await req.params.id;
                     const x = await db.query(
@@ -53,11 +52,14 @@ module.exports = {
             } else {
                 res.json({message: 'Only Finance managers or ticket holders may view users in this way.'});
             }
+        });
     },
 
     // update a single user at any field
     update: async (req: Request, res: Response) => {
-        if(CHECK.isAdmin()) {
+        jwt.verify(req.token, 'secretkey', async (err, authData) => {
+            if(err)  res.sendStatus(403);
+        if(authData.role_id === 2) {
             try {
                 // deconstruct req.body into 2 arrays
                 const myKeys = [...Object.keys(req.body)];
@@ -76,11 +78,13 @@ module.exports = {
         } else {
             res.json({message: "Only admins may update a user."})
         }
-       
+    });
     },
 
     // register a new user
     addOne: async (req: Request, res: Response) => {
+        jwt.verify(req.token, 'secretkey', async (err, authData) => {
+            if(err)  res.sendStatus(403);
         try {
             console.log(req.body)
 
@@ -106,6 +110,7 @@ module.exports = {
         } catch (err) {
             throw err;
         } 
+    });
     },
 
 }

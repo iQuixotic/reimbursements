@@ -3,11 +3,14 @@ import { Request, Response } from 'express';
 import db from '../config/connection';
 import QueryMaker from '../classes/helpers/QueryMaker';
 import CHECK from '../utils/checkers';
+import jwt from 'jsonwebtoken';
 
 module.exports = {
     
     // CREATE a new db entry for a single reimbursement
     addOne: async (req: Request, res: Response) => {
+        jwt.verify(req.token, 'secretkey', async (err, authData) => {
+            if(err)  res.sendStatus(403);
         try {            
            // deconstruct req.body into arrays like: [keys] [vals]
             const myKeys = [...Object.keys(req.body)];
@@ -19,12 +22,16 @@ module.exports = {
             return res.json({message: 'You did such a good! Reimbursement added !!'});
         } catch (err) { 
             throw err; 
-        }
+        
+    }
+    })
       },
 
     // update a single reimbursement
     update: async (req: Request, res: Response) => {
-        if(CHECK.isFinancialManager()) {
+        jwt.verify(req.token, 'secretkey', async (err, authData) => {
+            if(err)  res.sendStatus(403);
+        if(authData.role_id === 1) {
         try {
             // deconstruct req.body into 2 arrays like: [keys] [vals]
             const myKeys = [...Object.keys(req.body)];
@@ -38,15 +45,18 @@ module.exports = {
         } catch (err) { 
             throw err; 
         } 
-    }
+        }
+    });
+    
     },
 
     // get by status
     getStatus: async (req: Request, res: Response) => {
-        if(CHECK.isFinancialManager()) {
+        jwt.verify(req.token, 'secretkey', async (err, authData) => {
+            if(err)  res.sendStatus(403);
+        if(authData.role_id === 1) {
 
             try {
-
                 const joinFieldsOnArr = ['reimbursements._id',
                     'reimbursements.author',  'reimbursements.status',
                     'reimbursement_statuses.status' ]; 
@@ -59,13 +69,16 @@ module.exports = {
             } catch (err) { 
                 throw err; 
             } 
-    }
+        }
+    });
       
     },
 
     // get by author
     getAuthor: async (req: Request, res: Response) => {
-        if(CHECK.isFinancialManager()) {
+        jwt.verify(req.token, 'secretkey', async (err, authData) => {
+            if(err)  res.sendStatus(403);
+        if(authData.role_id === 1) {
         try {
             const joinFieldsOnArr = ['reimbursements._id',
                 'reimbursements.author',  'reimbursements.status',
@@ -81,7 +94,8 @@ module.exports = {
             throw err; 
         } 
     }
+})
      
-    },
+    }
 
 }
