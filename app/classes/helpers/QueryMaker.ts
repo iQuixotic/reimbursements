@@ -41,17 +41,20 @@ class QueryMaker {
     static login(cols) {
       return `select ${cols} from users where (username, password) = ($1, $2);`;
     }
-    
+
     // get all 
     static getAll(tableName) {
       return `SELECT * FROM ${tableName}`;
     }
 
-    // get by some queryKey
-    static getOne(tableName, queryKey) {
-      return `SELECT * FROM ${tableName} WHERE ${queryKey} = $1`;
+    static getHashedPass() {
+      return `select password from users where username = $1;`;
     }
 
+    // get by some queryKey
+    static getOne(tableName, queryKey) {
+      return `SELECT * FROM ${tableName} WHERE ${queryKey} = $1;`;
+    }
 
     // join 2 tables on a certain result set
     static getJoinedTbl(tableName, fields, secondTable, tblKey1, tblKey2, id) {
@@ -59,7 +62,7 @@ class QueryMaker {
        `SELECT ${fields.join(', ')} 
         FROM ${tableName} 
         LEFT JOIN ${secondTable}
-        ON ${tblKey1} = ${tblKey2}
+        ON ${tblKey1} = ${tblKey2}  $2
         WHERE ${tblKey2} = $1, 
         ${[id]}`
       );

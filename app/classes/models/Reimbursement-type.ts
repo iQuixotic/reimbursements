@@ -10,4 +10,4 @@ class ReimbursementType {
     
 }
 
-module.exports = {ReimbursementType};
+export default ReimbursementType;
