@@ -34,18 +34,24 @@ class QueryMaker {
       );
       return queryString;
     }
-
+    
     // - - - - - READ - - - - - - 
+    
+    // for login
+    static login(cols) {
+      return `select ${cols} from users where (username, password) = ($1, $2);`;
+    }
     
     // get all 
     static getAll(tableName) {
       return `SELECT * FROM ${tableName}`;
     }
 
-    // get by id
+    // get by some queryKey
     static getOne(tableName, queryKey) {
       return `SELECT * FROM ${tableName} WHERE ${queryKey} = $1`;
     }
+
 
     // join 2 tables on a certain result set
     static getJoinedTbl(tableName, fields, secondTable, tblKey1, tblKey2, id) {
@@ -54,7 +60,8 @@ class QueryMaker {
         FROM ${tableName} 
         LEFT JOIN ${secondTable}
         ON ${tblKey1} = ${tblKey2}
-        WHERE ${tblKey2} = ${id}`
+        WHERE ${tblKey2} = $1, 
+        ${[id]}`
       );
       console.log(queryString)
       return queryString;

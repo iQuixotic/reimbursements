@@ -1,5 +1,7 @@
-const routerR = require('express').Router();
-const reimbursementController = require('../controllers/reimbursements-controller.ts');
+// imports and variables
+import { Router } from 'express';
+import reimbursementController from '../controllers/reimbursements-controller';
+const routerR = Router();
 
 // CRUD routes for reimbursements
 routerR.route('/')
@@ -14,4 +16,4 @@ routerR.route('/userId/:id')
 routerR.route('/status/:id')
     .get(reimbursementController.getStatus);
     
-module.exports = routerR;
+export default routerR;

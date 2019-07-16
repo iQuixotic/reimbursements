@@ -1,0 +1,21 @@
+{
+    "Logins": {
+        "route": "/login",
+            "FinancialManager1": {
+                "username": "sandra",
+                "password": "sarasara"
+            },
+            "Admin2": {
+                "username": "user2",
+                "password": "timtim"
+            },
+            "DefaultUser3": {
+                "username": "user3",
+                "password": "tisktisk"
+            }
+        },
+    "Patches": {
+
+    }
+    }
+}

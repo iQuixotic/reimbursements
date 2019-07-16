@@ -1,14 +1,18 @@
-// const path = require("path");
-const router = require('express').Router();
-const jwt = require('jsonwebtoken');
-const userRoutes = require('./users.ts');
-const loginRoutes = require('./login.ts');
-const reimbursementRoutes = require('./reimbursements.ts');
-import verifyToken from '../utils/logins/JWT';
+// imports and variables
+import { Router } from 'express';
+import MW from '../utils/JWT';
+import userRoutes from './users';
+import loginRoutes from './login';
+import registerRoutes from './register';
+import reimbursementRoutes from './reimbursements';
+const router = Router();
 
-// tell the application when to use these routes
-router.use('/users', verifyToken, userRoutes);
+// register and login
+router.use('/register', registerRoutes);
 router.use('/login', loginRoutes);
-router.use('/reimbursements', verifyToken, reimbursementRoutes);
 
-module.exports = router;
+// MW is a helper object that contains middleware for validation and auth
+router.use('/users', MW.verifyToken, MW.getPrivileges, userRoutes);
+router.use('/reimbursements', MW.verifyToken, MW.getPrivileges, reimbursementRoutes);
+
+export default router;

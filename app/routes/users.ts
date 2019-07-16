@@ -1,7 +1,7 @@
-// import { verify } from "crypto";
-// import verifyToken from '../utils/logins/JWT';
-const routerU = require('express').Router();
-const usersController = require('../controllers/users-controller.ts');
+// imports and variables
+import usersController from '../controllers/users-controller';
+import { Router } from 'express';
+const routerU = Router();
 
 // CRUD for users info
 routerU.route('/')
@@ -10,8 +10,5 @@ routerU.route('/')
 
 routerU.route('/:id')
     .get(usersController.getOne);
-    
-routerU.route('/register')
-    .post(usersController.addOne);
 
-module.exports = routerU;
+export default routerU;

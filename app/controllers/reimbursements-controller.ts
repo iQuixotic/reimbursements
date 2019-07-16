@@ -1,11 +1,11 @@
-// import db from '../models/Reimbursement';
+// imports
 import { Request, Response } from 'express';
 import db from '../config/connection';
-import QueryMaker from '../classes/helpers/QueryMaker';
-import CHECK from '../utils/checkers';
+import QueryMaker from '../classes/helpers';
 import jwt from 'jsonwebtoken';
+// - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
 
-module.exports = {
+export default {
     
     // CREATE a new db entry for a single reimbursement
     addOne: async (req: Request, res: Response) => {
@@ -19,15 +19,15 @@ module.exports = {
             await db.query(
                 QueryMaker.insertOne('reimbursements', myKeys),
                 myVals);
-            return res.json({message: 'You did such a good! Reimbursement added !!'});
+            // return res.json({message: 'You did such a good! Reimbursement added !!'});
         } catch (err) { 
             throw err; 
-        
+            
     }
     })
       },
 
-    // update a single reimbursement
+    // UPDATE a single reimbursement
     update: async (req: Request, res: Response) => {
         jwt.verify(req.token, 'secretkey', async (err, authData) => {
             if(err)  res.sendStatus(403);
@@ -52,9 +52,10 @@ module.exports = {
 
     // get by status
     getStatus: async (req: Request, res: Response) => {
-        jwt.verify(req.token, 'secretkey', async (err, authData) => {
-            if(err)  res.sendStatus(403);
-        if(authData.role_id === 1) {
+        // jwt.verify(req.token, 'secretkey', async (err, authData) => {
+        //     if(err)  res.sendStatus(403);
+        console.log(req.body)
+        if(res.authData.role_id === 1) {
 
             try {
                 const joinFieldsOnArr = ['reimbursements._id',
@@ -70,7 +71,7 @@ module.exports = {
                 throw err; 
             } 
         }
-    });
+    // });
       
     },
 

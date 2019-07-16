@@ -1,43 +1,34 @@
-// import db from '../classes/models/User';
-// import jwt from 'jsonwebtoken';
-const jwt = require('jsonwebtoken');
+// imports and variables
 import { Request, Response } from 'express';
 import db from '../config/connection';
-import CHECK  from '../utils/checkers';
 import User from '../classes/models/User';
+import QueryMaker from '../classes/helpers';
+const jwt = require('jsonwebtoken');
+// - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
 
-module.exports = {
+export default {
     
     // CREATE a new db entry for login event
     login: async (req: Request, res: Response) => {
         
         try {   
-            await db.query(`select * from users where (username, password) = ($1, $2);`, [req.body.username, req.body.password])      
-            console.log(req.body)
-            const response = await db.query(`select role_id from users where (username, password) = ($1, $2);`, [req.body.username, req.body.password])
-
-            const user = await new User(req.body) //  QueryMaker.insertOne('reimbursements', myKeys),
+            db.query(QueryMaker.login( '*'), [req.body.username, req.body.password])       
+            const response = await db.query(QueryMaker.login('role_id'), [req.body.username, req.body.password] )
+            const user = await new User(req.body) 
             
+            // sign token and pass secret
             jwt.sign({ 
                 _id: req.body._id, username: req.body.username, 
                 password: req.body.password, role_id: response.rows[0].role_id }, 
                 'secretkey', {expiresIn: '12h'}, (err, token) => {
                     
-                console.log(token)
-               res.json({
-                   token
-                });
+               res.json({ token });
             });
-             return user;
-                //  myVals);
-            //  return res.json({message: 'You did such a good! Reimbursement added !!'});
+
+            return user;
          } catch (err) { 
              throw err; 
          }
-         
-        // setUID(req.body._id);
-        console.log('at least i will give you an error');
-
     },
 
 }

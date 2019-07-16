@@ -1,20 +1,18 @@
-// import db from '../classes/models/User';
+// imports
 import { Request, Response } from 'express';
-import jwt from 'jsonwebtoken';
 import db from '../config/connection';
-import QueryMaker from '../classes/helpers/QueryMaker';
+import QueryMaker from '../classes/helpers';
 import User from '../classes/models/User';
 import bcrypt from 'bcrypt';
-import CHECK from '../utils/checkers';
+// - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
 
-module.exports = {
+export default {
 
-    // get all of the users
+    // READ all users
     getAll: async (req: Request, res: Response) => {
-        jwt.verify(req.token, 'secretkey', async (err, authData) => {
-            if(err)  res.sendStatus(403);
-                
-            if(authData.role_id === 1) {
+        
+            // only FINANCE MANAGERS
+            if(req.authData['role_id'] === 1) {
                 try {                 
                     const userArr = [];
                     const x = await db.query(QueryMaker.getAll('users'))
@@ -29,48 +27,47 @@ module.exports = {
             } else{
                 res.json({message: 'Only Finance managers may view all users'});
             }
-            
-        });
-        
       },
 
-    // // get a single user by id
+    // READ a single user by id
     getOne: async (req: Request, res: Response) => {
-        jwt.verify(req.token, 'secretkey', async (err, authData) => {
-            if(err)  res.sendStatus(403);
-        if(authData.role_id === 1 || CHECK.isSelfReferencial()) {
+        
+        // FINANCE MANAGERS and CURRENT USERS
+        if(req.authData['role_id'] === 1 || req.params.id == req.selfReference) {
                 try {
                     const id = await req.params.id;
                     const x = await db.query(
                         QueryMaker.getOne('users', '_id'), [id]);
                     const user = await new User(x.rows[0]);
-                    console.log('this is the user for getOne', user);
+                    
                     return res.json(user);
-                } catch (err) {
+                } 
+                catch (err) {
                     throw err;
                 } 
-            } else {
+            } 
+            else {
                 res.json({message: 'Only Finance managers or ticket holders may view users in this way.'});
             }
-        });
     },
 
-    // update a single user at any field
+    // UPDATE a single user at any field    
     update: async (req: Request, res: Response) => {
-        jwt.verify(req.token, 'secretkey', async (err, authData) => {
-            if(err)  res.sendStatus(403);
-        if(authData.role_id === 2) {
+
+        // only ADMINS
+        if(req.authData['role_id'] === 2) {
             try {
-                // deconstruct req.body into 2 arrays
-                const myKeys = [...Object.keys(req.body)];
-                const myVals = [...Object.values(req.body)];
+                const user = new User(req.body);
+
+                // deconstruct user into 2 arrays like: [keys] [vals]
+                const myKeys = [...Object.keys(user)];
+                const myVals = [...Object.values(user)];
     
                 // -1 to account for id 
                 const x = await db.query(
                     QueryMaker.setOne('users', '_id', myKeys.length-1, myKeys),
                      myVals);
-                const user = await new User(x.rows[0]);
-                console.log('this is what a     USER    SMELLS  LIKE: ', user )
+
                 return res.json(user);
             } catch (err) {
                 throw err;
@@ -78,39 +75,5 @@ module.exports = {
         } else {
             res.json({message: "Only admins may update a user."})
         }
-    });
-    },
-
-    // register a new user
-    addOne: async (req: Request, res: Response) => {
-        jwt.verify(req.token, 'secretkey', async (err, authData) => {
-            if(err)  res.sendStatus(403);
-        try {
-            console.log(req.body)
-
-            bcrypt.hash(req.body.password, 10, (err, hash) => {
-                if(err) {
-                    return res.status(500).json({
-                        error: err
-                    });
-                } else {
-                    // const user = new User(
-                    //     req.body.username, hash,                       
-                    //     req.body.first_name, req.body.last_name, 
-                    //     req.body.email, req.body.role_id
-                    // );
-                    // user.save();
-                }
-            }), 
-            await console.log(res.json())
-            await res.status(201).json({
-               message: `New user ${req.body.username} created.`
-            })
-        
-        } catch (err) {
-            throw err;
-        } 
-    });
-    },
-
+    }
 }

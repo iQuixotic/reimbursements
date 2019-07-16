@@ -1,11 +1,11 @@
-// pacakages
+// pacakages and internal files
 import express from 'express';
 import bodyParser from 'body-parser';
-const app = express();
+import routes from './app/routes';
 
-// internal files and variables
+// variables
+const app = express();
 const PORT = process.env.PORT || 4044;
-const routes = require('./app/routes');
 
 // Define middleware
 app.use(bodyParser.urlencoded({ extended: true }));
