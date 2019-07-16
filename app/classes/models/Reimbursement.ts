@@ -1,5 +1,6 @@
-import ReimbursementType from '../models/Reimbursement-type';
-import ReimbursementStatus from '../models/Reimbursement-status';
+// imports
+import { ReimbursementStatus, ReimbursementType } from '../models';
+// - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
 class Reimbursement {
     private reimbursement_id: number; // primary key
     private author: number;  // foreign key -> User, not null

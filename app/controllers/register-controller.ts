@@ -2,7 +2,7 @@
 import bcrypt from 'bcrypt';
 import { Request, Response } from 'express';
 import db from '../config/connection';
-import User from '../classes/models/User';
+import { User } from '../classes/models';
 import QueryMaker from '../classes/helpers';
 // - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
 

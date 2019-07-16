@@ -1,4 +1,3 @@
-
 class ReimbursementType {
     private _id: number; // primary key
     private type: string; // not null, unique

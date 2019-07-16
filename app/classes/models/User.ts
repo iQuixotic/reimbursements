@@ -1,8 +1,8 @@
-import Role from '../models/Role';
 import db from '../../config/connection';
+import { Role } from '../models';
 import QueryMaker from '../helpers';
 import bcrypt from 'bcrypt';
-
+// - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
 class User {
     private _id: number; // primary key
     private username: string; // not null, unique

@@ -1,26 +1,25 @@
 // imports and variables
-import { Request, Response } from 'express';
 import db from '../config/connection';
-import User from '../classes/models/User';
+import { User } from '../classes/models';
 import QueryMaker from '../classes/helpers';
-const jwt = require('jsonwebtoken');
-import bcrypt from 'bcrypt';
+import { Request, Response } from 'express';
+import jwt from 'jsonwebtoken';
 // - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
 
 export default {
     
     // CREATE a new db entry for login event
-    login: async (req: Request, res: Response) => {
+    login: async (req: Request, res: Response): Promise<User> => {
         
         // boolean
-        const validCredentials = await User.checkUser(req, req.body.username, req.body.password)
+        const validCredentials: boolean = await User.checkUser(req, req.body.username, req.body.password)
         
         if(validCredentials) {
             try {       
                 // set response equal to the role_id (pre-striping) and create a new user
                 const response = await db.query(QueryMaker.login('role_id'), [req.body.username, req.password] );
-                const user = await new User(req.body) 
-                                
+                const user: User = await new User(req.body) 
+                
                 // sign token and pass secret
                 jwt.sign({ 
                     _id: req.body._id, username: req.body.username, 
@@ -29,6 +28,7 @@ export default {
                         
                    res.json({ token });
                 });
+                console.log(user)
     
                 return user;
              } catch (err) { 
