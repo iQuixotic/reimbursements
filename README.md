@@ -3,28 +3,30 @@
 
 ### How it Works
 Database can be queried with Postman. It is neccessary to be logged-in in order to acess all routes except the register route. Once you login, you will recieve a JSON web token as a response. Place that in the *Authorization* header like so:
-```
-Authorization | Bearer <token>
-```
+
+    Authorization | Bearer <token>
+
 From there, the following routes are allowed: 
 
-Routes | Purpose
+**Routes** | **Purpose**
 --- | ---
-POST /register | Register a new user
-POST /login | Login as a user with 1 of 3 privilege levels
-GET /users | returns a list of all users
-GET /users/:id | return a single user
-PATCH /users | change a user based on the payload provided in the body
-GET /reimbursements/status/:id | return reimbursement of a certain status type
-GET /reimbursements/author/:id | return all reimbursements by a certain author
-POST /reimbursements | create a new reimbursement
-PATCH /reimbursements | edit a single reimbursement along any field (send id in payload)
+**POST /register** | *Register a new user*
+**POST /login** | *Login as a user with 1 of 3 privilege levels*
+**GET /users** | *returns a list of all users*
+**GET /users/:id** | *return a single user*
+**PATCH /users** | *change a user based on the payload provided in the body*
+**GET /reimbursements/status/:id** | *return reimbursement of a certain status type*
+**GET /reimbursements/author/:id** | *return all reimbursements by a certain author*
+**POST /reimbursements** | *create a new reimbursement*
+**PATCH /reimbursements** | *edit a single reimbursement along any field (send id in payload)*
 
 -Also note, SQL table starter code provided.
 
 ### Purpose 
  ```
- This app was made with the purpose of working with multiple tables in a relational database. Postman was used to test the routes. This back-end project features a login (using JSON web tokens) and encrypted user passwords. 
+ This app was made with the purpose of working with multiple tables in a relational 
+ database. Postman was used to test the routes. This back-end project features a login 
+ (using JSON web tokens) and encrypted user passwords. 
  ```
 
 ### Techs Used
