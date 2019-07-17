@@ -1,6 +1,5 @@
 import db from '../../config/connection';
-import { Role } from '../models';
-import QueryMaker from '../helpers';
+import { QueryMaker, Role } from '../../classes';
 import bcrypt from 'bcrypt';
 // - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
 class User {

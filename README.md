@@ -1,6 +1,13 @@
 # Credits
  *- a simple backend-only reimbursement app*
 
+### Purpose 
+ ```
+ This app was made with the purpose of working with multiple tables in a relational 
+ database. Postman was used to test the routes. This back-end project features a login 
+ (using JSON web tokens) and encrypted user passwords. 
+ ```
+
 ### How it Works
 Database can be queried with Postman. It is neccessary to be logged-in in order to acess all routes except the register route. Once you login, you will recieve a JSON web token as a response. Place that in the *Authorization* header like so:
 
@@ -20,22 +27,18 @@ From there, the following routes are allowed:
 **POST /reimbursements** | *create a new reimbursement*
 **PATCH /reimbursements** | *edit a single reimbursement along any field (send id in payload)*
 
--Also note, SQL table starter code provided.
+- If you hit a route without the proper privilege level, you will recieve an apt message.
+- Also note, SQL table starter code provided.
 
-### Purpose 
- ```
- This app was made with the purpose of working with multiple tables in a relational 
- database. Postman was used to test the routes. This back-end project features a login 
- (using JSON web tokens) and encrypted user passwords. 
- ```
 
 ### Techs Used
 **Techs** | **Uses**
 --- | --- 
 **Typescript** |  *Type validation*
-**jsonwebtoken** | *Used to authenticate -- hold authData to be passed around to check privileges*
-**Bcrypt** |  *Used to encrypt passwords and compare hased paswords*
+**jsonwebtoken** | *Used to authenticate users and hold authData to be passed around to check privileges*
+**Bcrypt** |  *Used to encrypt passwords and compare hashed paswords*
 **Postgresql** |  *Relational Database*
+
 
 ### Acknowledgements
 1. There are some variables and functions that were not type checked. This is something that I would like to implement more of in the future.

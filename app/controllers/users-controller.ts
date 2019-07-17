@@ -1,8 +1,7 @@
 // imports
 import { Request, Response } from 'express';
 import db from '../config/connection';
-import QueryMaker from '../classes/helpers';
-import User from '../classes/models/User';
+import { QueryMaker, User }from '../classes';
 // - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
 
 export default {
@@ -14,11 +13,14 @@ export default {
             if(req.authData['role_id'] === 1) {
                 try {                 
                     const userArr = [];
+
+                    // put users in an array
                     const x = await db.query(QueryMaker.getAll('users'))
                     x.rows.forEach(el => {
                         const user = new User(el);  
                         userArr.push(user)              
                     });
+                    
                     return res.json(x.rows);
                 } catch (err) {
                     throw err;

@@ -1,5 +1,5 @@
 // imports
-import { ReimbursementStatus, ReimbursementType } from '../models';
+import { ReimbursementStatus, ReimbursementType } from '../../classes';
 // - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
 class Reimbursement {
     private _id: number | null | undefined; // primary key

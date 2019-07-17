@@ -2,8 +2,7 @@
 import bcrypt from 'bcrypt';
 import { Request, Response } from 'express';
 import db from '../config/connection';
-import { User } from '../classes/models';
-import QueryMaker from '../classes/helpers';
+import { User, QueryMaker } from '../classes';
 // - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
 
 export default {
@@ -42,3 +41,8 @@ export default {
         } 
     }
 }
+
+// {
+// 	"_id": 2,
+// 	"date_resolved": "2000-06-23"
+// }

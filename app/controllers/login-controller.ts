@@ -1,9 +1,9 @@
 // imports and variables
-import db from '../config/connection';
-import { User } from '../classes/models';
-import QueryMaker from '../classes/helpers';
 import { Request, Response } from 'express';
 import jwt from 'jsonwebtoken';
+import db from '../config/connection';
+import { User, QueryMaker } from '../classes';
+import SECRET from '../config/secret';
 // - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
 
 export default {
@@ -26,7 +26,7 @@ export default {
                 jwt.sign({ 
                     _id: req.body._id, username: req.body.username, 
                     password: req.body.password, role_id: response.rows[0].role_id }, 
-                    'secretkey', {expiresIn: '16h'}, (err, token) => {
+                    SECRET.TOKEN_SECRET_KEY, {expiresIn: '16h'}, (err, token) => {
                         
                    res.json({ token });
                 });

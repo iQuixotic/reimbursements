@@ -1,8 +1,7 @@
 // imports
 import { Request, Response } from 'express';
 import db from '../config/connection';
-import QueryMaker from '../classes/helpers';
-import { Reimbursement } from '../classes/models';
+import { QueryMaker, Reimbursement } from '../classes';
 // - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
 
 export default {

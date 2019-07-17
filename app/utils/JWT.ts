@@ -1,6 +1,7 @@
 import jwt from 'jsonwebtoken';
 import db from '../config/connection';
-import QueryMaker from '../classes/helpers/QueryMaker';
+import { QueryMaker } from '../classes';
+import SECRET from '../config/secret';
 /*- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
 // __________FORMAT OF TOKEN___________
 // ===========  HEADERS  =============
@@ -14,6 +15,8 @@ export default {
     // verify token
     verifyToken: (req, res, next) => {
         const bearerHeader = req.headers['authorization'];
+
+        // if exists set req.token
         if(typeof bearerHeader !== 'undefined') {
             const bearer = bearerHeader.split(' ');
             const bearerToken = bearer[1];
@@ -28,7 +31,7 @@ export default {
     
     // check user privileges and check for self reference
     getPrivileges: (req, res, next) => {
-        jwt.verify(req.token, 'secretkey', async (err, authData) => {
+        jwt.verify(req.token, SECRET.TOKEN_SECRET_KEY, async (err, authData) => {
                 
                 // check role_id ---- set req.authdata so I can pass
                 if(err)  res.sendStatus(403);
