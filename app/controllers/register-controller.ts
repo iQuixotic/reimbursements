@@ -41,8 +41,3 @@ export default {
         } 
     }
 }
-
-// {
-// 	"_id": 2,
-// 	"date_resolved": "2000-06-23"
-// }

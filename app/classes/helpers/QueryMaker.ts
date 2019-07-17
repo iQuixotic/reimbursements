@@ -58,21 +58,13 @@ class QueryMaker {
 
     // join 2 tables on a certain result set
     static getJoinedTbl(tableName, fields, secondTable, tblKey1, tblKey2) {
-      
-      console.log((
+      return (
         `SELECT ${fields.join(', ')} 
-        FROM ${tableName} 
-        LEFT JOIN ${secondTable}
-        ON ${tblKey1} = ${tblKey2} 
-        WHERE ${tblKey2} = $1;`
-        ))
-        return (
-          `SELECT ${fields.join(', ')} 
-            FROM ${tableName} 
-            LEFT JOIN ${secondTable}
-            ON ${tblKey1} = ${tblKey2} 
-            WHERE ${tblKey2} = $1;`
-          );
+          FROM ${tableName} 
+          LEFT JOIN ${secondTable}
+          ON ${tblKey1} = ${tblKey2} 
+          WHERE ${tblKey2} = $1;`
+        );
     }
     
     // - - - - - UPDATE - - - - - - 
