@@ -52,10 +52,10 @@ CREATE TABLE reimbursements (
   _id SERIAL PRIMARY KEY,
   author int references users(_id),
   amount int,
-  date_submitted date,
-  date_resolved date,
+  date_submitted varchar(255),
+  date_resolved varchar(255),
   description  varchar(255),
   resolver int references users(_id),
   status int references reimbursement_statuses(_id),
-  type int references reimbursement_types(_id),
+  type int references reimbursement_types(_id)
 );

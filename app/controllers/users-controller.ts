@@ -57,14 +57,17 @@ export default {
         // only ADMINS
         if(req.authData['role_id'] === 2) {
             try {
-                const user = new User(req.body);
+                // get a full user and construct patched together obj as user
+                const x = await db.query(
+                    QueryMaker.getOne('users', '_id'), [req.body._id]);
+                const user = await new User({...x.rows[0], ...req.body});
 
                 // deconstruct user into 2 arrays like: [keys] [vals]
                 const myKeys = [...Object.keys(user)];
                 const myVals = [...Object.values(user)];
     
                 // -1 to account for id 
-                const x = await db.query(
+                const y = await db.query(
                     QueryMaker.setOne('users', '_id', myKeys.length-1, myKeys),
                      myVals);
 

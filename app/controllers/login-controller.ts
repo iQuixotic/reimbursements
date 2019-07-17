@@ -26,7 +26,7 @@ export default {
                 jwt.sign({ 
                     _id: req.body._id, username: req.body.username, 
                     password: req.body.password, role_id: response.rows[0].role_id }, 
-                    'secretkey', {expiresIn: '12h'}, (err, token) => {
+                    'secretkey', {expiresIn: '16h'}, (err, token) => {
                         
                    res.json({ token });
                 });
