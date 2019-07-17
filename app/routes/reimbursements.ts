@@ -9,7 +9,7 @@ routerR.route('/')
     .patch(reimbursementController.update);
 
 // reimbursements is 1 to 1 with userId
-routerR.route('/userId/:id')
+routerR.route('/author/:id')
     .get(reimbursementController.getAuthor);
 
 // reimbursements is 1 to 1 with statusId 

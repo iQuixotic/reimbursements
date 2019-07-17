@@ -12,10 +12,8 @@ export default {
     addOne: async (req: Request, res: Response) => {
         try {            
             const reim = new Reimbursement(req.body);
-
-           // deconstruct req.body into arrays like: [keys] [vals]
-            const myKeys = [...Object.keys(req.body)];
-            const myVals = [...Object.values(req.body)];
+            const myKeys = [...Object.keys(reim)];
+            const myVals = [...Object.values(reim)];
 
             await db.query(
                 QueryMaker.insertOne('reimbursements', myKeys),
@@ -33,12 +31,17 @@ export default {
         // FINANCE MANAGERS may update
         if(req.authData['role_id'] === 1) {
         try {
-            // deconstruct req.body into 2 arrays like: [keys] [vals]
-            const myKeys = [...Object.keys(req.body)];
-            const myVals = [...Object.values(req.body)];
+            // get a reimbursement and construct patched together obj as user
+            const x = await db.query(
+                QueryMaker.getOne('reimbursements', '_id'), [req.body._id]);
+            const r = req.body.date_resolved ? {resolver: req.authData.role_id} : null;
+            const reim = await new Reimbursement({...x.rows[0], ...req.body, ...r});
+            
+            const myKeys = [...Object.keys(reim)];
+            const myVals = [...Object.values(reim)];
 
             // -1 to account for id not present
-            const x = await db.query(
+            await db.query(
                 QueryMaker.setOne('reimbursements', '_id', myKeys.length-1, myKeys),
                  myVals);
 
@@ -46,7 +49,9 @@ export default {
         } catch (err) { 
             throw err; 
         }
-    };
+    } else {
+        res.json({message: "There's nothing here for you."})
+    }
     
     },
 
@@ -72,7 +77,9 @@ export default {
             } catch (err) { 
                 throw err; 
             } 
-        }      
+        } else {
+            res.json({message: "Quit it..."})
+        }
     },
 
     // get by author
@@ -84,20 +91,23 @@ export default {
             // passed to JOIN query
             const joinFieldsOnArr = ['reimbursements._id',
                 'reimbursements.author',  'reimbursements.status',
-                'reimbursement_types.type']; 
+                'users.first_name', 'users.last_name']; 
 
             // query JOIN reimbursements.status -> status._id
             const x = await db.query(
                 QueryMaker.getJoinedTbl('reimbursements', joinFieldsOnArr, 
-                'reimbursement_types', 'reimbursements.status', 
-                'reimbursement_types._id'), req.params.id);
+                'users', 'reimbursements.author', 
+                'users._id'), [req.params.id]);
 
             return res.json(x.rows);
             } catch (err) { 
                 throw err; 
             } 
-
+        } else {
+            res.json({message: "Only Financials and ticket holders bla bla bla"})
         }
+
+        
      
     }
 

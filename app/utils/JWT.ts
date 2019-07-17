@@ -33,8 +33,6 @@ export default {
                 // check role_id ---- set req.authdata so I can pass
                 if(err)  res.sendStatus(403);
                 else req.authData = await authData;
-                
-                console.log( 'this is the auth now', authData)
 
                 // get _id from user and asign reference check on req obj
                 const x = await db.query(

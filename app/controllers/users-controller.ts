@@ -3,7 +3,6 @@ import { Request, Response } from 'express';
 import db from '../config/connection';
 import QueryMaker from '../classes/helpers';
 import User from '../classes/models/User';
-// import bcrypt from 'bcrypt';
 // - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
 
 export default {

@@ -49,28 +49,30 @@
         }, {
             "type": "POST",
             "input": [{
+                "_id": 8,
                 "author": 1,
                 "amount": 999,
-                "date_submitted": 1999425,
-                "date_resolved": 2001230,
+                "date_submitted": "1999-04-25",
+                "date_resolved": "2001-02-30",
                 "description": "New Toy",
                 "resolver": 1,
                 "status": 2,
                 "type": 4
             }, {
+                "_id": 9,
                 "author": 2,
                 "amount": 44,
-                "date_submitted": 20190425,
-                "date_resolved": 20190530,
-                "description": "Glass",
+                "date_submitted": "2019-04-25",
+                "date_resolved": "2019-05-30",
+                "description": "Glass Cannon",
                 "resolver": 2,
                 "status": 3,
                 "type": 4
             }, {
-                "author": 4,
+                "author": 10,
                 "amount": 30,
-                "date_submitted": 20190420,
-                "date_resolved": 20190610,
+                "date_submitted": "2019-04-20",
+                "date_resolved": "2019-06-10",
                 "description": "POSTERS",
                 "resolver": 3,
                 "status": 1,

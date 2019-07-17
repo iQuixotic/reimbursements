@@ -32,7 +32,6 @@ class QueryMaker {
         `INSERT INTO ${tableName} (${colNames.join(', ')}) 
          VALUES (${this.printDollars(colNames.length-1).reverse().join(', ')});`
       );
-      console.log(queryString)
       return queryString;
     }
     
