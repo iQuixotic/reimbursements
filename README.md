@@ -9,6 +9,7 @@ Authorization | Bearer <token>
    From there, the following routes are allowed: 
     ```
         Routes | Purpose
+        --- | ---
         POST /register | Register a new user
         POST /login | Login as a user with 1 of 3 privilege levels
         GET /users | returns a list of all users
@@ -29,7 +30,7 @@ Authorization | Bearer <token>
 
 ### Techs Used
 **Techs** | **Uses**
---- | --- | ---
+--- | --- 
 Typescript |  *Type validation*
 jsonwebtoken | *Used to authenticate -- hold authData to be passed around to check privileges*
 Bcrypt |  *Used to encrypt passwords and compare hased paswords*
@@ -41,6 +42,5 @@ Postgresql |  *Relational Database*
 3. There will probably be a final code cleanup at some point in the future to make a few functions more generic, check for redundant exporting, code indention, etc. For now, all the routes work and that is good!
 
 ## THANKS FOR VISITING !!!
-```
+
 - *iQuixotic*
-```
