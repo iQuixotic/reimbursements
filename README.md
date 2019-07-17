@@ -42,9 +42,9 @@ From there, the following routes are allowed:
 2. The database could be more restrictive. Constraints were left more open-ended for now as I would like to have a better vision of how the UI would be before I add in more constaints.
 3. There will probably be a final code cleanup at some point in the future to make a few functions more generic, check for redundant exporting, code indention, etc. For now, all the routes work and that is good!
 
+## THANKS FOR VISITING !!!
+
 
 ##### Made with Love, by:
 
 *iQuixotic*
-
-## THANKS FOR VISITING !!!
