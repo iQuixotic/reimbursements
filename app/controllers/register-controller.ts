@@ -16,9 +16,6 @@ export default {
             const saltBae = await bcrypt.genSalt(10);
             const hashed = await bcrypt.hash(req.body.password, saltBae);
 
-                console.log('this is the saltBay', saltBae);
-                console.log('and this is the hashed after salting', hashed);
-
                     let obj = {
                         _id: req.body._id,
                         username: req.body.username, 
@@ -35,8 +32,8 @@ export default {
                     const myKeys = [...Object.keys(user)];
                     const myVals = [...Object.values(user)];
 
+                    // insert user
                     await db.query(QueryMaker.insertOne('users', myKeys), myVals);           
-             
             res.status(201).json({
                 message: `New user ${req.body.username} created !!`
             });

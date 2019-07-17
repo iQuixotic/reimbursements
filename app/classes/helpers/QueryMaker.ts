@@ -32,6 +32,7 @@ class QueryMaker {
         `INSERT INTO ${tableName} (${colNames.join(', ')}) 
          VALUES (${this.printDollars(colNames.length-1).reverse().join(', ')});`
       );
+      console.log(queryString)
       return queryString;
     }
     
@@ -57,17 +58,14 @@ class QueryMaker {
     }
 
     // join 2 tables on a certain result set
-    static getJoinedTbl(tableName, fields, secondTable, tblKey1, tblKey2, id) {
-      const queryString = (
-       `SELECT ${fields.join(', ')} 
-        FROM ${tableName} 
-        LEFT JOIN ${secondTable}
-        ON ${tblKey1} = ${tblKey2}  $2
-        WHERE ${tblKey2} = $1, 
-        ${[id]}`
-      );
-      console.log(queryString)
-      return queryString;
+    static getJoinedTbl(tableName, fields, secondTable, tblKey1, tblKey2) {
+      return (
+        `SELECT ${fields.join(', ')} 
+          FROM ${tableName} 
+          LEFT JOIN ${secondTable}
+          ON ${tblKey1} = ${tblKey2} 
+          WHERE ${tblKey2} = $1;`
+        );
     }
     
     // - - - - - UPDATE - - - - - - 

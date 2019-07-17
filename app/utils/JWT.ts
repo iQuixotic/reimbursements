@@ -30,10 +30,12 @@ export default {
     getPrivileges: (req, res, next) => {
         jwt.verify(req.token, 'secretkey', async (err, authData) => {
                 
-                // check role_id
+                // check role_id ---- set req.authdata so I can pass
                 if(err)  res.sendStatus(403);
                 else req.authData = await authData;
                 
+                console.log( 'this is the auth now', authData)
+
                 // get _id from user and asign reference check on req obj
                 const x = await db.query(
                     QueryMaker.getOne('users', 'username'), [authData.username]);

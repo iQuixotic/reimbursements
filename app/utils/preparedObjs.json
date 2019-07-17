@@ -51,8 +51,8 @@
             "input": [{
                 "author": 1,
                 "amount": 999,
-                "date_submitted": "1999-04-25",
-                "date_resolved": "2001-02-30",
+                "date_submitted": 1999425,
+                "date_resolved": 2001230,
                 "description": "New Toy",
                 "resolver": 1,
                 "status": 2,
@@ -60,8 +60,8 @@
             }, {
                 "author": 2,
                 "amount": 44,
-                "date_submitted": "2019-04-25",
-                "date_resolved": "2019-05-30",
+                "date_submitted": 20190425,
+                "date_resolved": 20190530,
                 "description": "Glass",
                 "resolver": 2,
                 "status": 3,
@@ -69,8 +69,8 @@
             }, {
                 "author": 4,
                 "amount": 30,
-                "date_submitted": "2019-04-20",
-                "date_resolved": "2019-06-10",
+                "date_submitted": 20190420,
+                "date_resolved": 20190610,
                 "description": "POSTERS",
                 "resolver": 3,
                 "status": 1,

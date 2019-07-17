@@ -16,6 +16,8 @@ export default {
         
         if(validCredentials) {
             try {       
+                const x = await db.query(QueryMaker.login( '*'), [req.body.username, req.body.password]) 
+
                 // set response equal to the role_id (pre-striping) and create a new user
                 const response = await db.query(QueryMaker.login('role_id'), [req.body.username, req.password] );
                 const user: User = await new User(req.body) 
@@ -28,7 +30,6 @@ export default {
                         
                    res.json({ token });
                 });
-                console.log(user)
     
                 return user;
              } catch (err) { 

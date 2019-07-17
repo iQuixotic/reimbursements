@@ -3,14 +3,14 @@ import { Request, Response } from 'express';
 import db from '../config/connection';
 import QueryMaker from '../classes/helpers';
 import User from '../classes/models/User';
-import bcrypt from 'bcrypt';
+// import bcrypt from 'bcrypt';
 // - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
 
 export default {
 
     // READ all users
     getAll: async (req: Request, res: Response) => {
-        
+
             // only FINANCE MANAGERS
             if(req.authData['role_id'] === 1) {
                 try {                 
