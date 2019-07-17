@@ -6,22 +6,21 @@ Database can be queried with Postman. It is neccessary to be logged-in in order 
 ```
 Authorization | Bearer <token>
 ```
-   From there, the following routes are allowed: 
-    ```
-        Routes | Purpose
-        --- | ---
-        POST /register | Register a new user
-        POST /login | Login as a user with 1 of 3 privilege levels
-        GET /users | returns a list of all users
-        GET /users/:id | return a single user
-        PATCH /users | change a user based on the payload provided in the body
-        GET /reimbursements/status/:id | return reimbursement of a certain status type
-        GET /reimbursements/author/:id | return all reimbursements by a certain author
-        POST /reimbursements | create a new reimbursement
-        PATCH /reimbursements | edit a single reimbursement along any field (send id in payload)
-    ```
+From there, the following routes are allowed: 
 
-    -Also note, SQL table starter code provided.
+Routes | Purpose
+--- | ---
+POST /register | Register a new user
+POST /login | Login as a user with 1 of 3 privilege levels
+GET /users | returns a list of all users
+GET /users/:id | return a single user
+PATCH /users | change a user based on the payload provided in the body
+GET /reimbursements/status/:id | return reimbursement of a certain status type
+GET /reimbursements/author/:id | return all reimbursements by a certain author
+POST /reimbursements | create a new reimbursement
+PATCH /reimbursements | edit a single reimbursement along any field (send id in payload)
+
+-Also note, SQL table starter code provided.
 
 ### Purpose 
  ```
@@ -31,10 +30,10 @@ Authorization | Bearer <token>
 ### Techs Used
 **Techs** | **Uses**
 --- | --- 
-Typescript |  *Type validation*
-jsonwebtoken | *Used to authenticate -- hold authData to be passed around to check privileges*
-Bcrypt |  *Used to encrypt passwords and compare hased paswords*
-Postgresql |  *Relational Database*
+**Typescript** |  *Type validation*
+**jsonwebtoken** | *Used to authenticate -- hold authData to be passed around to check privileges*
+**Bcrypt** |  *Used to encrypt passwords and compare hased paswords*
+**Postgresql** |  *Relational Database*
 
 ### Acknowledgements
 1. There are some variables and functions that were not type checked. This is something that I would like to implement more of in the future.
