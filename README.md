@@ -44,4 +44,6 @@ From there, the following routes are allowed:
 
 ## THANKS FOR VISITING !!!
 
-- *iQuixotic*
+##### Made with Love, by:
+
+*iQuixotic*
