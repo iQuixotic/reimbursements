@@ -1,7 +1,7 @@
 // imports
 import { Request, Response } from 'express';
 import db from '../config/connection';
-import { QueryMaker, User }from '../classes';
+import { QueryMaker, User } from '../classes';
 // - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
 
 export default {
