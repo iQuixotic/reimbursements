@@ -1,13 +1,14 @@
 import * as React from "react";
+import { Layout } from '../../../containers';
 
 class LoginPg extends React.Component{
 
   // -----------------------------------
   public render() {
       return(
-          <div>
+          <Layout {...this.props} {...this.state}>
               Hello, I am the login !!!
-          </div>
+          </Layout>
       )
   }
 }

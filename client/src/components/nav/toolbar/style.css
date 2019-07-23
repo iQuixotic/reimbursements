@@ -1,0 +1,56 @@
+.Toolbar {
+    top: 0;
+    left: 0;
+    color: white;
+    background: rgb(13, 42, 105);
+    height: 100px;
+    position: fixed;
+    z-index: 100;
+    width: 100%;
+}
+
+.Toolbar-Main {
+    width: 100%;
+    top: 0;
+    position: absolute;
+    z-index: 105;
+    font-size: 4rem;
+    text-align: center;
+}
+
+.Toolbar-Nav {
+    position: relative;
+    margin-top: 6rem;
+    z-index: 105;
+    width: 22%;
+    float: right;
+}
+
+.Toolbar-Nav a {
+    color: white;
+    padding: 17px 17px 8px;
+}
+
+.Toolbar-Nav a:hover, .Toolbar a:active {    
+    border-bottom: 4px solid rgb(53, 207, 53);
+    border-radius: 15px 15px 0 0;
+    background-color: #31558b77;
+}
+
+@media only screen and (max-width: 995px) {
+    
+    .Toolbar-Nav {
+        margin-top: 62px;
+    }
+
+    .Toolbar-Nav a {
+        padding: 15px 15px 12px;
+    }
+}
+
+@media only screen and (max-width: 768px) {
+
+    .Toolbar-Nav {
+        width: 25%;
+    }
+} 
