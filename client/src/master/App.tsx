@@ -18,8 +18,6 @@ class App extends React.Component {
           <Route exact={true} path="/list" component={ListAllPg} />
           <Route exact={true} path="/register" component={RegisterPg} />
           <Route exact={true} path="/financeDepo/edit" component={EditStatusPg} />
-
-
         </div>
       </Router>
     );

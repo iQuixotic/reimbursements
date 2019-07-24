@@ -46,7 +46,7 @@ class Layout extends Component<IProps, IState> {
               </MQ>
               <MQ upperLimit={599}>
                 {!this.state.sideDrawerOpen ?                  
-                <div className='mobile-burger'><Burger size='4x' onClick={this.sideDrawerToggle}/></div> :
+                <div className='mobile-burger'><Burger size='2x' onClick={this.sideDrawerToggle}/></div> :
                 <div onClick={this.sideDrawerToggle}><Sidedrawer/><Backdrop/></div>                            
                 }
               </MQ>

@@ -10,7 +10,7 @@ export default {
     getAll: async (req: Request, res: Response) => {
 
             // only FINANCE MANAGERS
-            if(req.authData['role_id'] === 1) {
+            // if(req.authData['role_id'] === 1) {
                 try {                 
                     const userArr = [];
 
@@ -25,16 +25,16 @@ export default {
                 } catch (err) {
                     throw err;
                 }
-            } else{
-                res.json({message: 'Only Finance managers may view all users'});
-            }
+            // } else{
+                // res.json({message: 'Only Finance managers may view all users'});
+            // }
       },
 
     // READ a single user by id
     getOne: async (req: Request, res: Response) => {
         
         // FINANCE MANAGERS and CURRENT USERS
-        if(req.authData['role_id'] === 1 || req.params.id == req.selfReference) {
+        // if(req.authData['role_id'] === 1 || req.params.id == req.selfReference) {
                 try {
                     const id = await req.params.id;
                     const x = await db.query(
@@ -46,10 +46,10 @@ export default {
                 catch (err) {
                     throw err;
                 } 
-            } 
-            else {
-                res.json({message: 'Only Finance managers or ticket holders may view users in this way.'});
-            }
+            // } 
+            // else {
+            //     res.json({message: 'Only Finance managers or ticket holders may view users in this way.'});
+            // }
     },
 
     // UPDATE a single user at any field    

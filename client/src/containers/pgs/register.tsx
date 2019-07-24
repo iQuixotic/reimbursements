@@ -5,6 +5,10 @@ class RegisterPg extends React.Component{
     public state = {
         message: "Hello from the register Page."
     }
+
+    componentWillMount = () => {
+        // console.log(this.state)
+    }
   // -----------------------------------
   public render() {
       return(
