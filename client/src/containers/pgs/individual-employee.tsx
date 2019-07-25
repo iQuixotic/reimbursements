@@ -20,7 +20,6 @@ class IndividualEmployeePg extends React.Component{
             componentWillMount = () => {
                 this.setState({ loading: true })
                 const myProps: any = this.props
-                console.log(myProps)
                 apiGET.getSingleUser(myProps.match.params.id)
                   .then(res => res.json())
                   .then((res) => this.getInitialData(res))
@@ -37,12 +36,12 @@ class IndividualEmployeePg extends React.Component{
                 email: args[0].email,
                 role_id: args[0].role_id
              })
-            this.logState()
+            // this.logState()
         }
 
-        logState = () => {
-            console.log('this is the late state', this.state)
-        }
+        // logState = () => {
+        //     console.log('this is the late state', this.state)
+        // }
     
   // -----------------------------------
   public render() {

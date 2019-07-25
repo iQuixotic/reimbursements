@@ -27,13 +27,12 @@ class ListAllPg extends React.Component{
         apiGET.getSingleUser(e.currentTarget.value)
             .then(res => res.json())
             .then(res => console.log(res))
-            // .then(res => this.setState({ users: res }))
             .catch(err => { throw err })
     }
   // -----------------------------------
   public render() {
       return(
-          <Layout {...this.props} {...this.state}>
+          <Layout {...this.state}>
               Hello, I am the login !!!
               <br/>
               <br/>
@@ -52,7 +51,7 @@ class ListAllPg extends React.Component{
 
                 <div className='button-div'>
                     
-                    <a {...this.props} href={`/employees/${each._id}`}>
+                    <a href={`/employees/${each._id}`}>
                         <button value={each._id}
                         className='button1' 
                         onClick={this.getSingleUser}>
