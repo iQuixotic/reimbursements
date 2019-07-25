@@ -41,6 +41,7 @@ export default {
                         QueryMaker.getOne('users', '_id'), [id]);
                     const user = await new User(x.rows[0]);
                     
+                    console.log(user)
                     return res.json(user);
                 } 
                 catch (err) {

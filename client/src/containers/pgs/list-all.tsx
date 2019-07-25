@@ -45,18 +45,20 @@ class ListAllPg extends React.Component{
         {this.state.message}
         {this.state.users.map(each => {
             return (
-            <div className='gray-content-box' key={each._id} >                
-                {/* <span className='line-spacing'>_id     : {each._id} <br/></span> */}
-                <span className='line-spacing'>Username: {each.username} <br/></span>
-                <span className='line-spacing'>Password: {each.password} </span>
+                <div className='gray-content-box' key={each._id} >                
+                    {/* <span className='line-spacing'>_id     : {each._id} <br/></span> */}
+                    <span className='line-spacing'>Username: {each.username} <br/></span>
+                    <span className='line-spacing'>Password: {each.password} </span>
 
                 <div className='button-div'>
                     
-                    <button value={each._id}
-                      className='button1' 
-                      onClick={this.getSingleUser}>
-                        View User
-                    </button>
+                    <a {...this.props} href={`/employees/${each._id}`}>
+                        <button value={each._id}
+                        className='button1' 
+                        onClick={this.getSingleUser}>
+                            View User
+                        </button>
+                    </a>
                     
                     <button className='button2'>
                         View Expenses

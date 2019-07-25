@@ -4,6 +4,7 @@
     border-radius: 8px;
     padding: 1.5rem;
     margin: 3rem;
+    overflow: hidden;
 }
 
 .gray-content-box .line-spacing {
@@ -30,4 +31,8 @@
 .gray-content-box .button-div button:hover {
     background: rgb(112, 0, 112);
     color: white;
+}
+
+.individual-user-card {
+
 }
