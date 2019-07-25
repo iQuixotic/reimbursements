@@ -1,0 +1,1 @@
+export { default as PaintedThing } from './reactHouse.png';

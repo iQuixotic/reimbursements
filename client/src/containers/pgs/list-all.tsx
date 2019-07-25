@@ -1,6 +1,7 @@
 import * as React from "react";
 import { Layout } from '..';
 import { apiGET } from "../../api";
+import { PaintedThing } from '../../assets';
 import './style.css';
 
 class ListAllPg extends React.Component{
@@ -40,11 +41,12 @@ class ListAllPg extends React.Component{
               <br/>
               <br/>
               <br/>
+              <img src={PaintedThing} alt=""/>
         {this.state.message}
         {this.state.users.map(each => {
             return (
             <div className='gray-content-box' key={each._id} >                
-                <span className='line-spacing'>_id     : {each._id} <br/></span>
+                {/* <span className='line-spacing'>_id     : {each._id} <br/></span> */}
                 <span className='line-spacing'>Username: {each.username} <br/></span>
                 <span className='line-spacing'>Password: {each.password} </span>
 
