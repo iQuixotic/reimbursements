@@ -68,7 +68,7 @@ class IndividualEmployeePg extends React.Component{
     
           </Layout>
       )
-  }
+    }
 }
 
 export default IndividualEmployeePg;
