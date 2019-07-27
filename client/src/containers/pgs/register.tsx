@@ -4,22 +4,26 @@ import { apiPOST } from "api";
 
 class RegisterPg extends React.Component{
     public state = {
-        message: "Hello from the register Page.",
         email: '', 
         password: '', 
         firstName: '',
-        lastName: ''
+        lastName: '',
+        username: ''
     }
 
     inputChangeHandler = (e) => {
+        const email = this.state.email;
         this.setState({
-            [e.currentTarget.name]: e.currentTarget.value
+            [e.currentTarget.name]: e.currentTarget.value,
+            username: email.substring(0, email.indexOf('@'))
         })
-        console.log(this.state)
     }
 
     registerSubmitHandler = () => {
         apiPOST.addNewUser(this.state)
+            .then(res => res.json())
+            .then(res => console.log(res))
+            .catch(err => { throw err })
         console.log('hello')
         console.log(this.state)
     }
@@ -37,7 +41,6 @@ class RegisterPg extends React.Component{
         <br/>
         <br/>
         <br/>
-            {this.state.message}
 
             <div className="login-inputs-div">
                 <label htmlFor="email">Email: </label>
