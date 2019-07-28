@@ -4,33 +4,39 @@ import { apiPOST } from "api";
 
 class RequestCreditPg extends React.Component{
     public state = {
-        email: '', 
-        password: '', 
-        firstName: '',
-        lastName: '',
-        username: ''
+        _id: 60,
+        author: 1, // should be from authdata login
+        amount: 0,
+        date_submitted: 1,
+        date_resolved: null,
+        description: '',
+        resolver: null,
+        status: 1,
+        type: 1
+    }
+
+    intParser = (e) => {
+        this.inputChangeHandler(e)
     }
 
     inputChangeHandler = (e) => {
-        const email = this.state.email;
-        this.setState({
-            [e.currentTarget.name]: e.currentTarget.value,
-            username: email.substring(0, email.indexOf('@'))
-        })
-    }
-
-    registerSubmitHandler = () => {
-        apiPOST.addNewUser(this.state)
-            .then(res => res.json())
-            .then(res => console.log(res))
-            .catch(err => { throw err })
-        console.log('hello')
+        if(e.currentTarget.name === 'type' || e.currentTarget.name === 'amount') {
+            this.setState({ [e.currentTarget.name]: parseInt(e.currentTarget.value)})
+        } else {
+            this.setState({
+                [e.currentTarget.name]: e.currentTarget.value
+            })
+        }
         console.log(this.state)
     }
 
-    componentWillMount = () => {
-        // console.log(this.state)
+    registerSubmitHandler = () => {
+        apiPOST.submitNewReimbursement(this.state)
+            .then(res => res.json())
+            .then(res => console.log(res))
+            .catch(err => { throw err })
     }
+
   // -----------------------------------
   public render() {
       return(
@@ -43,27 +49,24 @@ class RequestCreditPg extends React.Component{
         <br/>
 
             <div className="login-inputs-div">
-                <label htmlFor="email">Email: </label>
-                <input onChange={(e) => this.inputChangeHandler(e)} name='email' type="text"/>
+                {/* <label htmlFor="author">Author: </label>
+                <input onChange={(e) => this.inputChangeHandler(e)} name='author' type="text"/> */}
 
-                <label htmlFor="password">Password: </label>
-                <input onChange={(e) => this.inputChangeHandler(e)} type='password' name='password'/>
+                <label htmlFor="email">Amount: </label>
+                <input onChange={(e) => this.inputChangeHandler(e)} name='amount' type="text"/>
 
-                {/* <label htmlFor="passwordConfirm">Confirm Password: </label>
-                <input onChange={(e) => this.inputChangeHandler(e)} type='password' name='passwordConfirm'/> */}
+                <label htmlFor="description">Description: </label>
+                <input onChange={(e) => this.inputChangeHandler(e)} name='description' type="text"/>
 
-                <label htmlFor="firstName">First Name: </label>
-                <input onChange={(e) => this.inputChangeHandler(e)} type='password' name='firstName'/>
+                <select onChange={(e) => this.inputChangeHandler(e)} name="type" id="">
+                    <option value="1">Lodging</option>
+                    <option value="2">Travel</option>
+                    <option value="3">Food</option>
+                    <option value="4">Other</option>
+                </select>
 
-                <label htmlFor="lastName">Last Name: </label>
-                <input onChange={(e) => this.inputChangeHandler(e)} type='password' name='lastName'/>
-
-                {/* make a role 1-3 selection box here */}
-
-                <a href="#">Forgot Password...</a>
                 <div className="login-and-register-btns">
-                    <button >Login</button>
-                    <button onClick={() => this.registerSubmitHandler()}>Register</button>
+                    <button onClick={() => this.registerSubmitHandler()}>Submit</button>
                 </div>
             </div>
 

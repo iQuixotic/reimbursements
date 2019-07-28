@@ -7,7 +7,8 @@ import {
   ListAllPg,
   RegisterPg,
   EditStatusPg,
-  IndividualEmployeePg
+  IndividualEmployeePg,
+  RequestCreditPg
 } from '../containers';
 
 class App extends React.Component {
@@ -19,6 +20,7 @@ class App extends React.Component {
           <Route exact={true} path="/list" component={ListAllPg} />
           <Route exact={true} path="/employees/:id" component={IndividualEmployeePg} />
           <Route exact={true} path="/financeDepo/edit" component={EditStatusPg} />
+          <Route exact={true} path="/requestCredit" component={RequestCreditPg} />
       </Router>
     );
   }

@@ -4,6 +4,8 @@ export { default as ListAllPg } from './pgs/list-all';
 export { default as RegisterPg } from './pgs/register';
 export { default as EditStatusPg } from './pgs/edit-status';
 export { default as IndividualEmployeePg } from './pgs/individual-employee';
+export { default as RequestCreditPg } from './pgs/requestCredit';
+
 
 
 
