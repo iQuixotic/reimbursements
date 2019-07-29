@@ -8,15 +8,20 @@ class RegisterPg extends React.Component{
         password: '', 
         firstName: '',
         lastName: '',
-        username: ''
+        username: '',
+        roleId: 1
     }
 
     inputChangeHandler = (e) => {
+        if(e.currentTarget.name === 'role_id') {
+            this.setState({ [e.currentTarget.name]: parseInt(e.currentTarget.value)})
+        } else {
         const email = this.state.email;
         this.setState({
             [e.currentTarget.name]: e.currentTarget.value,
             username: email.substring(0, email.indexOf('@'))
         })
+    }
     }
 
     registerSubmitHandler = () => {
@@ -31,6 +36,8 @@ class RegisterPg extends React.Component{
     componentWillMount = () => {
         // console.log(this.state)
     }
+    
+
   // -----------------------------------
   public render() {
       return(
@@ -53,12 +60,16 @@ class RegisterPg extends React.Component{
                 <input onChange={(e) => this.inputChangeHandler(e)} type='password' name='passwordConfirm'/> */}
 
                 <label htmlFor="firstName">First Name: </label>
-                <input onChange={(e) => this.inputChangeHandler(e)} type='password' name='firstName'/>
+                <input onChange={(e) => this.inputChangeHandler(e)} type='text' name='firstName'/>
 
                 <label htmlFor="lastName">Last Name: </label>
-                <input onChange={(e) => this.inputChangeHandler(e)} type='password' name='lastName'/>
+                <input onChange={(e) => this.inputChangeHandler(e)} type='text' name='lastName'/>
 
-                {/* make a role 1-3 selection box here */}
+                <select onChange={(e) => this.inputChangeHandler(e)} name="type" id="">
+                    <option value="1">Finance Manager</option>
+                    <option value="2">Administrator</option>
+                    <option value="3">Default User</option>
+                </select>
 
                 <a href="#">Forgot Password...</a>
                 <div className="login-and-register-btns">

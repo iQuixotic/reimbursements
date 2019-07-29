@@ -2,22 +2,25 @@ import * as React from "react";
 import { Layout } from '..';
 import { apiPOST } from "api";
 
+const d = new Date();
+const dformat = [d.getMonth()+1,
+    d.getDate(),
+    d.getFullYear()].join('-')+' '+
+    [d.getHours(),
+    d.getMinutes(),
+    d.getSeconds()].join(':');
+
 class RequestCreditPg extends React.Component{
     public state = {
-        // _id: 60,
         author: 1, // should be from authdata login
         amount: 0,
-        date_submitted: '',
-        date_resolved: null,
+        dateSubmitted: dformat,
+        dateResolved: null,
         description: '',
         resolver: null,
         status: 1,
         type: 1
     }    
-
-    // intParser = (e) => {
-    //     this.inputChangeHandler(e)
-    // }
 
     inputChangeHandler = (e) => {
         if(e.currentTarget.name === 'type' || e.currentTarget.name === 'amount') {
@@ -27,28 +30,15 @@ class RequestCreditPg extends React.Component{
                 [e.currentTarget.name]: e.currentTarget.value
             })
         }
-        console.log(this.state)
     }
-
-    setDateThenSubmit = () => {
-        const d = new Date();
-        const dformat = [d.getMonth()+1,
-            d.getDate(),
-            d.getFullYear()].join('/')+' '+
-           [d.getHours(),
-            d.getMinutes(),
-            d.getSeconds()].join(':');
-
-            console.log('this is the date I will send', dformat)
-            this.setState({ date_submitted: dformat })
-            this.registerSubmitHandler();
-    }
-
+        
+    
     registerSubmitHandler = () => {
         apiPOST.submitNewReimbursement(this.state)
             .then(res => res.json())
             .then(res => console.log(res))
             .catch(err => { throw err })  
+        // console.log(this.state)
     }
 
   // -----------------------------------
@@ -80,7 +70,7 @@ class RequestCreditPg extends React.Component{
                 </select>
 
                 <div className="login-and-register-btns">
-                    <button onClick={() => this.setDateThenSubmit()}>Submit</button>
+                    <button onClick={() => this.registerSubmitHandler()}>Submit</button>
                 </div>
             </div>
 

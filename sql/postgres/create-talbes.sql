@@ -30,7 +30,6 @@ CREATE TABLE users (
 
 -- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
 
-
   -- for creating the reimbursementStatuses table
 CREATE TABLE reimbursement_statuses (
   _id SERIAL PRIMARY KEY,

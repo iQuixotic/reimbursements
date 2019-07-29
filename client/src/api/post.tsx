@@ -5,29 +5,35 @@ export default {
             _id: 60,
             username: data.username,
             password: data.password,
-            first_name: data.firsName,
+            first_name: data.firstName,
             last_name: data.lastName,
             email: data.email, 
-            role_id: 1
+            role_id: data.roleId
         }
-        return fetch('http://localhost:4044/register', {
+        return fetch('/register', {
         method: 'POST',
         headers: {'Content-Type':'application/json'},
         // headers: {},
         body: JSON.stringify(obj)
     })
-
-
 },
 
     submitNewReimbursement: (data) => {
-        console.log('this will data', data)
-        
+        let obj = {
+            author: data.author, // should be from authdata login
+            amount: data.amount,
+            date_submitted: data.dateSubmitted,
+            date_resolved: data.dateResolved,
+            description: data.description,
+            resolver: data.resolver,
+            status: data.status,
+            type: data.type
+        }    
         return fetch('/reimbursements', {
             method: 'POST',
             headers: {'Content-Type':'application/json'},
             // headers: {},
-            body: JSON.stringify(data)
+            body: JSON.stringify(obj)
         })
     }
 
