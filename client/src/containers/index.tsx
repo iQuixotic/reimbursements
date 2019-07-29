@@ -6,9 +6,6 @@ export { default as EditStatusPg } from './pgs/edit-status';
 export { default as IndividualEmployeePg } from './pgs/individual-employee';
 export { default as RequestCreditPg } from './pgs/requestCredit';
 
-
-
-
 export { default as Loader } from './hoc/spinWheel';
 export { default as MQ } from './resp/mediaQuery';
 

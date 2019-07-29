@@ -3,7 +3,7 @@ import { QueryMaker, Role } from '../../classes';
 import bcrypt from 'bcrypt';
 // - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
 class User {
-    private _id: number; // primary key
+    // private _id: number; // primary key
     private username: string; // not null, unique
     private password: string; // not null
     private first_name: string; // not null
@@ -15,7 +15,7 @@ class User {
         if(!obj) {
             return;   
         }          
-        this._id = obj._id;
+        // this._id = obj._id;
         this.username = obj.username;
         this.password = obj.password;
         this.first_name = obj.first_name;

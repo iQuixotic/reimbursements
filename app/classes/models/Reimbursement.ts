@@ -2,7 +2,7 @@
 import { ReimbursementStatus, ReimbursementType } from '../../classes';
 // - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
 class Reimbursement {
-    private _id: number | null | undefined; // primary key
+    // private _id: number | null | undefined; // primary key
     private author: number;  // foreign key -> User, not null
     private amount: number;  // not null
     private date_submitted: string; // not null
@@ -16,7 +16,7 @@ class Reimbursement {
         if(!obj) {
             return;   
         }    
-        this._id = obj._id;
+        // this._id = obj._id;
         this.author = obj.author;
         this.amount = obj.amount;
         this.date_submitted = obj.date_submitted;

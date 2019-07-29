@@ -9,6 +9,7 @@ export default {
     // CREATE a new db entry for a single reimbursement 
     // ---------------ANYONE ALLOWED-------------------
     addOne: async (req: Request, res: Response) => {
+        console.log(req.body)
         try {            
             const reim = new Reimbursement(req.body);
             const myKeys = [...Object.keys(reim)];
