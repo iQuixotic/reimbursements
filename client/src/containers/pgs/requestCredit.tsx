@@ -13,9 +13,7 @@ class RequestCreditPg extends React.Component{
         resolver: null,
         status: 1,
         type: 1
-    }
-
-    
+    }    
 
     // intParser = (e) => {
     //     this.inputChangeHandler(e)
