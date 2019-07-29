@@ -1,7 +1,6 @@
 import * as React from "react";
 import { Layout } from '..';
 import { apiGET } from "../../api";
-import { PaintedThing } from '../../assets';
 import './style.css';
 
 class ListAllPg extends React.Component{
@@ -40,8 +39,8 @@ class ListAllPg extends React.Component{
               <br/>
               <br/>
               <br/>
-              <img src={PaintedThing} alt=""/>
-        {this.state.message}
+
+
         {this.state.users.map(each => {
             return (
                 <div className='gray-content-box' key={each._id} >                

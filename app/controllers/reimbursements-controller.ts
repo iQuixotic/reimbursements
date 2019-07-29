@@ -86,7 +86,7 @@ export default {
     getAuthor: async (req: Request, res: Response) => {
 
         // FINANCE MANAGERS and CURRENT USERS may view author
-        if(req.authData.role_id === 1 || req.params.id == req.selfReference){
+        // if(req.authData.role_id === 1 || req.params.id == req.selfReference){
         try {
             // passed to JOIN query
             const joinFieldsOnArr = ['reimbursements._id',
@@ -99,13 +99,14 @@ export default {
                 'users', 'reimbursements.author', 
                 'users._id'), [req.params.id]);
 
+                console.log(x.rows)
             return res.json(x.rows);
             } catch (err) { 
                 throw err; 
             } 
-        } else {
-            res.json({message: "Only Financials and ticket holders bla bla bla"})
-        }
+        // } else {
+            // res.json({message: "Only Financials and ticket holders bla bla bla"})
+        // }
 
         
      

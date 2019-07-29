@@ -12,14 +12,14 @@ const dformat = [d.getMonth()+1,
 
 class RequestCreditPg extends React.Component{
     public state = {
-        author: 1, // should be from authdata login
+        author: 2, // should be from authdata login
         amount: 0,
         dateSubmitted: dformat,
         dateResolved: null,
         description: '',
         resolver: null,
-        status: 1,
-        type: 1
+        status: 3,
+        type: 2
     }    
 
     inputChangeHandler = (e) => {
