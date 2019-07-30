@@ -59,7 +59,7 @@ export default {
     getStatus: async (req: Request, res: Response) => {
 
         // FINANCE MANAGERS and CURRENT USERS may get status
-        if(req.authData.role_id === 1 || req.params.id == req.selfReference) {
+        // if(req.authData.role_id === 1 || req.params.id == req.selfReference) {
 
             try {
                 // gets passed to the query
@@ -77,9 +77,9 @@ export default {
             } catch (err) { 
                 throw err; 
             } 
-        } else {
-            res.json({message: "Quit it..."})
-        }
+        // } else {
+        //     res.json({message: "Quit it..."})
+        // }
     },
 
     // get by author

@@ -22,7 +22,7 @@ class App extends React.Component {
           <Route exact={true} path="/employees/:id" component={IndividualEmployeePg} />
           <Route exact={true} path="/financeDepo/edit" component={EditStatusPg} />
           <Route exact={true} path="/requestCredit" component={RequestCreditPg} />
-          <Route exact={true} path="/creditList/:id" component={ViewAllReimPg} />
+          <Route exact={true} path="/creditList/:getBy/:id" component={ViewAllReimPg} />
       </Router>
     );
   }

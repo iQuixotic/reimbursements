@@ -5,7 +5,5 @@ export default {
 
     getAllCreditsByAuthor: (id) =>  fetch('/reimbursements/author/' + id),
     getAllCreditsByStatus: (id) =>  fetch('/reimbursements/status/' + id)
-
-
     
 };
