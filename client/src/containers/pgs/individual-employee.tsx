@@ -14,7 +14,7 @@ class IndividualEmployeePg extends React.Component {
             email: '',
             role_id: 1,
             loading: true,
-            editing: true
+            editing: false
         }
     
             componentWillMount = () => {
@@ -45,9 +45,20 @@ class IndividualEmployeePg extends React.Component {
         }
 
         inputChangeHandler = (e) => {
+            if(e.currentTarget.name === 'role_id') {
+                this.setState({ [e.currentTarget.name]: parseInt(e.currentTarget.value)})
+            } else {
+            const email = this.state.email;
             this.setState({
-                [e.currentTarget.name]: e.currentTarget.value
+                [e.currentTarget.name]: e.currentTarget.value,
+                username: email.substring(0, email.indexOf('@'))
             })
+          }
+          console.log(this.state)
+        }
+
+        sendPatchUser = () => {
+            console.log(this.state)
         }
     
   // -----------------------------------
@@ -61,18 +72,27 @@ class IndividualEmployeePg extends React.Component {
               </div>
                 {
                     this.state.editing ? (
-                        <span>
+                        <span className='patchable-inputs'>
                             {/* <input type='text' placeholder={this.state._id}/> */}
-                            <input type='text' placeholder={this.state.password}/>
-                            <input type='text' placeholder={this.state.first_name}/>
-                            <input type='text' placeholder={this.state.last_name}/>
-                            <input type='text' placeholder={this.state.email}/>
+                            {/* <label htmlFor="passwordI">Password: </label>
+                            <input name='passwordI' type='text' placeholder={this.state.password}/>
+                             */}
+                            <label htmlFor="first_name">First Name: </label>                            
+                            <input onChange={(e) => this.inputChangeHandler(e)} name='first_name' type='text' placeholder={this.state.first_name}/>
+                           
+                            <label htmlFor="first_name">Last Name: </label>                            
+                            <input onChange={(e) => this.inputChangeHandler(e)} name='last_name' type='text' placeholder={this.state.last_name}/>
 
-                             <select onChange={(e) => this.inputChangeHandler(e)} name="type">
+                            <label htmlFor="email">Email: </label>                            
+                            <input onChange={(e) => this.inputChangeHandler(e)} name='email' type='text' placeholder={this.state.email}/>
+
+                             <select onChange={(e) => this.inputChangeHandler(e)} name="role_id">
                                 <option value="1">Finance Manager</option>
                                 <option value="2">Administrator</option>                                 
                                 <option value="3">Default User</option>
                             </select>
+
+                            <button className='submit-btn' onClick={() => this.sendPatchUser()}>Submit Changes</button>
                             {/* <input type='text' placeholder={this.state.role_id}/> */}
                         </span>
                     ) : (

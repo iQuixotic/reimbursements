@@ -87,3 +87,18 @@
     font-size: 25px;    
     cursor: pointer;
 }
+
+.patchable-inputs {
+
+}
+
+.patchable-inputs input {
+    color: green;
+    padding: 4px;
+    margin: 5px;
+    background: rgb(235, 235, 235);
+    border: none;
+    border-bottom: 1px solid rgb(2, 2, 122);
+    display: block;
+    width: 70%;
+}
