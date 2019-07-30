@@ -1,7 +1,7 @@
 .Toolbar {
     top: 0;
     left: 0;
-    color: white;
+    color: rgb(0, 255, 13);
     background: rgb(0, 0, 0);
     height: 100px;
     position: fixed;
@@ -23,12 +23,12 @@
     margin-top: 6rem;
     z-index: 105;
     width: 22%;
-    float: right;
+    /* float: right; */
 }
 
 .Toolbar-Nav a {
-    color: white;
-    padding: 17px 17px 8px;
+    color: rgb(168, 2, 2);
+    padding: 0px 17px 8px;
 }
 
 .Toolbar-Nav a:hover, .Toolbar a:active {    

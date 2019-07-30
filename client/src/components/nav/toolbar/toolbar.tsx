@@ -10,6 +10,11 @@ const Toolbar = (props: any) => {
             </div>
 
             <div className="Toolbar-Nav">
+                <a href="/">Login</a>
+                <a href="/register">register</a>
+                <a href="/requestCredit">ReqCredit</a>
+                <a href="/list">Users</a>
+
                 {/* <NavItems
                     nav1="Accounts" link1='/'
                     nav2="New" link2='/new'

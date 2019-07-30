@@ -24,10 +24,17 @@ class ViewAllReimPg extends React.Component{
     
 
     componentWillMount = () => {
-        apiGET.getAllCreditsByAuthor(1)
+        this.setState({ loading: true })
+        const myProps: any = this.props
+        console.log(myProps.match.params.id)
+        apiGET.getAllCreditsByAuthor(myProps.match.params.id)
             .then(res => res.json())
-            .then(res => this.setState({ credits: res }))
-            .catch(err => { throw err })
+            // .then((res) => console.log(res))
+            .then(res => this.setState({ 
+                credits: res,
+                loading: false 
+            }))
+            .catch(err => { throw(err) });
     }
 
   // -----------------------------------
