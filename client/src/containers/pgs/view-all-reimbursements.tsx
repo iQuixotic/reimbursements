@@ -3,7 +3,6 @@ import { Layout } from '..';
 import { apiGET } from "../../api";
 import './style.css';
 
-
 class ViewAllReimPg extends React.Component{
     public state = {
         credits: [{
@@ -21,23 +20,6 @@ class ViewAllReimPg extends React.Component{
         }],
         getBy: 'status',
         idToLookFor: ''
-    }
-
-    checkWhatToGetBy = () => {
-        // if(this.state.getBy === 'author') {
-        //     console.log(this.state.idToLookFor)
-        //     apiGET.getAllCreditsByAuthor(this.state.idToLookFor)
-        //     .then(res => res.json())
-        //     .then(res => this.setState({ 
-        //         credits: res,
-        //         loading: false 
-        //     }))
-        //     .catch(err => { throw(err) });
-        // }
-        // if(this.state.getBy === 'status') {
-        //     console.log('this is to look for', this.state.idToLookFor)
-
-        // }
     }
     
     inputChangeHandler = (e) => {
@@ -88,12 +70,8 @@ class ViewAllReimPg extends React.Component{
   public render() {
       return(
           <Layout {...this.state}>
-              <br/>
-              <br/>
-              <br/>
-              <br/>
-              <br/>
-              <br/>
+             
+             <br/><br/>
 
                 <input checked type="radio" value='status' name='getBy' 
                 onChange={(e) => this.inputChangeHandler(e)}/>

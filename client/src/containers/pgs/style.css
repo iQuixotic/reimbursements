@@ -76,3 +76,14 @@
 .login-and-register-btns button:hover {
     cursor: pointer;
 }
+
+.edit-pencil {
+    color: red;
+    float: right;
+    
+}
+
+.edit-pencil:hover {
+    font-size: 25px;    
+    cursor: pointer;
+}

@@ -45,13 +45,9 @@ class RequestCreditPg extends React.Component{
   public render() {
       return(
         <Layout {...this.state}>
-        <br/>
-        <br/>
-        <br/>
-        <br/>
-        <br/>
-        <br/>
 
+            <br/>
+            <br/>
             <div className="login-inputs-div">
                 {/* <label htmlFor="author">Author: </label>
                 <input onChange={(e) => this.inputChangeHandler(e)} name='author' type="text"/> */}

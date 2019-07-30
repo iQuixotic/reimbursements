@@ -42,13 +42,8 @@ class RegisterPg extends React.Component{
   public render() {
       return(
         <Layout {...this.state}>
-        <br/>
-        <br/>
-        <br/>
-        <br/>
-        <br/>
-        <br/>
 
+        <br/><br/>
             <div className="login-inputs-div">
                 <label htmlFor="email">Email: </label>
                 <input onChange={(e) => this.inputChangeHandler(e)} name='email' type="text"/>

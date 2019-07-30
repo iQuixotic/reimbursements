@@ -8,13 +8,7 @@ class EditStatusPg extends React.Component{
   // -----------------------------------
   public render() {
       return(
-          <Layout {...this.props} {...this.state}>
-              <br/>
-              <br/>
-              <br/>
-              <br/>
-              <br/>
-              <br/>
+          <Layout {...this.state}>
         {this.state.message}
 
           </Layout>

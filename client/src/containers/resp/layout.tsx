@@ -43,6 +43,7 @@ class Layout extends Component<IProps, IState> {
             <div className='Layout'>
               <MQ lowerLimit={600}>
                 <Toolbar /> 
+                <div className="after-nav"></div>
               </MQ>
               <MQ upperLimit={599}>
                 {!this.state.sideDrawerOpen ?                  

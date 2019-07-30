@@ -32,15 +32,8 @@ class ListAllPg extends React.Component{
   public render() {
       return(
           <Layout {...this.state}>
-              Hello, I am the login !!!
-              <br/>
-              <br/>
-              <br/>
-              <br/>
-              <br/>
-              <br/>
 
-
+              <br/><br/>
         {this.state.users.map(each => {
             return (
                 <div className='gray-content-box' key={each._id} >                

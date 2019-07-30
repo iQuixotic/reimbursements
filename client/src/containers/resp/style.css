@@ -18,6 +18,10 @@
     animation: moveOut 1s;
 }
 
+.after-nav {
+    margin-top: 80px;
+}
+
 @keyframes moveOut {
     0% {
         transform: translateX(0);        
