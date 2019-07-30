@@ -56,12 +56,16 @@ export default {
     update: async (req: Request, res: Response) => {
 
         // only ADMINS
-        if(req.authData['role_id'] === 2) {
+        // if(req.authData['role_id'] === 2) {
             try {
+                console.log(req.body)
                 // get a full user and construct patched together obj as user
                 const x = await db.query(
                     QueryMaker.getOne('users', '_id'), [req.body._id]);
+                    console.log('this will be the x', x.rows[0])
                 const user = await new User({...x.rows[0], ...req.body});
+
+                console.log('this is a user USER', user)
 
                 // deconstruct user into 2 arrays like: [keys] [vals]
                 const myKeys = [...Object.keys(user)];
@@ -76,8 +80,8 @@ export default {
             } catch (err) {
                 throw err;
             } 
-        } else {
-            res.json({message: "Only admins may update a user."})
-        }
+        // } else {
+        //     res.json({message: "Only admins may update a user."})
+        // }
     }
 }

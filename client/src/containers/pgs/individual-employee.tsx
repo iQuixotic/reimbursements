@@ -1,7 +1,7 @@
 import * as React from "react";
 import { Layout } from '..';
 import './style.css';
-import { apiGET } from "api";
+import { apiGET, apiPATCH } from "api";
 
 class IndividualEmployeePg extends React.Component {
    
@@ -27,8 +27,11 @@ class IndividualEmployeePg extends React.Component {
                   .catch(err => { throw(err) });
               }
         getInitialData = async (...args: any) => {
+            const myProps: any = this.props
+            console.log('these are the args im getting', args)
             this.setState({ 
-                _id: args[0]._id,
+                loading: false,
+                _id: myProps.match.params.id,
                 username: args[0].username,
                 password: args[0].password,
                 first_name: args[0].first_name,
@@ -36,12 +39,12 @@ class IndividualEmployeePg extends React.Component {
                 email: args[0].email,
                 role_id: args[0].role_id
              })
+             console.log(this.state)
         }
 
 
         toggleEdit = () => {
             this.setState({ editing: !this.state.editing})
-            console.log(this.state.editing)
         }
 
         inputChangeHandler = (e) => {
@@ -54,11 +57,15 @@ class IndividualEmployeePg extends React.Component {
                 username: email.substring(0, email.indexOf('@'))
             })
           }
-          console.log(this.state)
+          console.log('this is teh role', this.state.role_id)
         }
 
         sendPatchUser = () => {
-            console.log(this.state)
+            apiPATCH.patchUser(this.state)
+                .then(res => res.json())
+                .then(res => console.log(res))
+                .catch(err => { throw(err) });
+            // console.log(this.state)
         }
     
   // -----------------------------------
