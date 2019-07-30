@@ -1,6 +1,6 @@
 import * as React from "react";
 import { Layout } from '..';
-import { apiGET } from "../../api";
+import { apiGET, apiPATCH } from "../../api";
 import './style.css';
 
 class ViewAllReimPg extends React.Component{
@@ -13,7 +13,7 @@ class ViewAllReimPg extends React.Component{
             date_resolved: '',
             description: '',
             resolver: '',
-            status: '',
+            status: 1,
             type: '',
             first_name: '',
             last_name: '',
@@ -24,7 +24,8 @@ class ViewAllReimPg extends React.Component{
         status: ''
     }
     
-    toggleEdit = () => {
+    toggleEdit = (e) => {
+        console.log(e.currentTarget.id)
         this.setState({ editing: !this.state.editing})
     }
 
@@ -32,8 +33,7 @@ class ViewAllReimPg extends React.Component{
         this.setState({
             [e.currentTarget.name]: e.currentTarget.value
         })
-        console.log(e.currentTarget.value)
-        console.log(this.state.getBy)
+        // console.log(e.currentTarget.value)
         // this.setState({
         //     getBy: e.target.
         // })
@@ -74,6 +74,11 @@ class ViewAllReimPg extends React.Component{
 
     sendPatchCredit = () => {
         console.log(this.state.status)
+        
+        apiPATCH.patchReim(this.state)
+            .then(res => res.json())
+            .then(res => console.log(res))
+            .catch(err => { throw(err) });
     }
   // -----------------------------------
   public render() {
@@ -97,37 +102,26 @@ class ViewAllReimPg extends React.Component{
                 >Set Up</a>
 
                 {this.state.editing ? (
-                        <span className='patchable-inputs'>
-                            {/* <input type='text' placeholder={this.state._id}/> */}
-                            {/* <label htmlFor="passwordI">Password: </label>
-                            <input name='passwordI' type='text' placeholder={this.state.password}/>
-                             */}
-                            {/* <label htmlFor="first_name">First Name: </label>                            
-                            <input onChange={(e) => this.inputChangeHandler(e)} name='first_name' type='text' placeholder={this.state.first_name}/>
-                     */}
-                     <div className='gray-content-box'  >   
-                    <div className="edit-pencil">
-                        <i onClick={() => this.toggleEdit()} className="fa fa-pencil" aria-hidden="true"></i>
-                    </div>
+                    <span className='patchable-inputs'>
+                            
+                        <div className='gray-content-box'  >   
+                            <div className="edit-pencil">
+                                <i onClick={(e) => this.toggleEdit(e)} className="fa fa-pencil" aria-hidden="true"></i>
+                            </div>
                             <label htmlFor="status"></label>
                             <select onChange={(e) => this.inputChangeHandler(e)} name="status">
                                 <option value="1">Pending</option>
                                 <option value="2">Approved</option>                                 
                                 <option value="3">Denied</option>
                             </select>
-
-                            <button className='submit-btn' onClick={() => this.sendPatchCredit()}>Submit Changes</button>
-                            {/* <input type='text' placeholder={this.state.role_id}/> */}
-                        </div>
-                        </span>
-                    ):(
-
-
+                        <button className='submit-btn' onClick={() => this.sendPatchCredit()}>Submit Changes</button>                    
+                    </div>
+                </span> ):(
               this.state.credits.map(each => {
                   return(
                   <div className='gray-content-box' key={each._id} >   
                     <div className="edit-pencil">
-                        <i onClick={() => this.toggleEdit()} className="fa fa-pencil" aria-hidden="true"></i>
+                        <i id={each._id.toString()} onClick={(e) => this.toggleEdit(e)} className="fa fa-pencil" aria-hidden="true"></i>
                     </div>
                     <span className='line-spacing'>Author: {each.author} <br/></span>
                     <span className='line-spacing'>Amount: {each.amount} <br/></span>
