@@ -4,6 +4,8 @@ import db from '../config/connection';
 import { QueryMaker, Reimbursement } from '../classes';
 // - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
 
+// condition ? truth case : false case
+
 export default {
     
     // CREATE a new db entry for a single reimbursement 
@@ -29,7 +31,7 @@ export default {
     update: async (req: Request, res: Response) => {
 
         // FINANCE MANAGERS may update
-        if(req.authData['role_id'] === 1) {
+        // if(req.authData['role_id'] === 1) {
         try {
             // get a reimbursement and construct patched together obj as user
             const x = await db.query(
@@ -49,9 +51,9 @@ export default {
         } catch (err) { 
             throw err; 
         }
-    } else {
-        res.json({message: "There's nothing here for you."})
-    }
+    // } else {
+    //     res.json({message: "There's nothing here for you."})
+    // }
     
     },
 
@@ -60,11 +62,14 @@ export default {
 
         // FINANCE MANAGERS and CURRENT USERS may get status
         // if(req.authData.role_id === 1 || req.params.id == req.selfReference) {
-
+            
             try {
                 // gets passed to the query
                 const joinFieldsOnArr = ['reimbursements._id',
-                    'reimbursements.author',  'reimbursements.status',
+                    'reimbursements.author',  'reimbursements.status', 
+                    'reimbursements.amount', 
+                    'reimbursements.date_submitted', 'reimbursements.date_resolved',
+                    'reimbursements.description', 'reimbursements.resolver',
                     'reimbursement_statuses.status' ]; 
 
                 // query JOIN reimbursements.author to author._id
@@ -73,6 +78,7 @@ export default {
                     'reimbursement_statuses', 'reimbursements.status', 
                     'reimbursement_statuses._id'), [parseInt(req.params.id)]);
                     
+                    console.log(x.rows)
                 return res.json(x.rows);
             } catch (err) { 
                 throw err; 
@@ -90,7 +96,9 @@ export default {
         try {
             // passed to JOIN query
             const joinFieldsOnArr = ['reimbursements._id',
-                'reimbursements.author',  'reimbursements.status',
+                'reimbursements.author',  'reimbursements.status', 'reimbursements.amount',
+                'reimbursements.resolver', 'reimbursements.date_submitted', 
+                'reimbursements.date_resolved', 'reimbursements.type',
                 'users.first_name', 'users.last_name']; 
 
             // query JOIN reimbursements.status -> status._id

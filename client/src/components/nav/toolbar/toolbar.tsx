@@ -12,8 +12,9 @@ const Toolbar = (props: any) => {
             <div className="Toolbar-Nav">
                 <a href="/">Login</a>
                 <a href="/register">register</a>
-                <a href="/requestCredit">ReqCredit</a>
+                <a href="/requestCredit">Req Credit</a>
                 <a href="/list">Users</a>
+                <a href="/creditList/status/1">Find By</a>
 
                 {/* <NavItems
                     nav1="Accounts" link1='/'

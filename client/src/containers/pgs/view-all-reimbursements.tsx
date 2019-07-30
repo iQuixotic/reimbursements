@@ -19,9 +19,15 @@ class ViewAllReimPg extends React.Component{
             last_name: '',
         }],
         getBy: 'status',
-        idToLookFor: ''
+        idToLookFor: '',
+        editing: false,
+        status: ''
     }
     
+    toggleEdit = () => {
+        this.setState({ editing: !this.state.editing})
+    }
+
     inputChangeHandler = (e) => {
         this.setState({
             [e.currentTarget.name]: e.currentTarget.value
@@ -66,6 +72,9 @@ class ViewAllReimPg extends React.Component{
             .catch(err => { throw(err) });
     }
 
+    sendPatchCredit = () => {
+        console.log(this.state.status)
+    }
   // -----------------------------------
   public render() {
       return(
@@ -86,10 +95,41 @@ class ViewAllReimPg extends React.Component{
                 <a href={`http://localhost:3000/creditList/${this.state.getBy}/${this.state.idToLookFor}`}
                 // onClick={() => this.checkWhatToGetBy()}
                 >Set Up</a>
-              {this.state.credits.map(each => {
+
+                {this.state.editing ? (
+                        <span className='patchable-inputs'>
+                            {/* <input type='text' placeholder={this.state._id}/> */}
+                            {/* <label htmlFor="passwordI">Password: </label>
+                            <input name='passwordI' type='text' placeholder={this.state.password}/>
+                             */}
+                            {/* <label htmlFor="first_name">First Name: </label>                            
+                            <input onChange={(e) => this.inputChangeHandler(e)} name='first_name' type='text' placeholder={this.state.first_name}/>
+                     */}
+                     <div className='gray-content-box'  >   
+                    <div className="edit-pencil">
+                        <i onClick={() => this.toggleEdit()} className="fa fa-pencil" aria-hidden="true"></i>
+                    </div>
+                            <label htmlFor="status"></label>
+                            <select onChange={(e) => this.inputChangeHandler(e)} name="status">
+                                <option value="1">Pending</option>
+                                <option value="2">Approved</option>                                 
+                                <option value="3">Denied</option>
+                            </select>
+
+                            <button className='submit-btn' onClick={() => this.sendPatchCredit()}>Submit Changes</button>
+                            {/* <input type='text' placeholder={this.state.role_id}/> */}
+                        </div>
+                        </span>
+                    ):(
+
+
+              this.state.credits.map(each => {
                   return(
-                  <div className='gray-content-box' key={each._id} >    
-                    <span className='line-spacing'>Author: {each.first_name} {each.last_name} <br/></span>
+                  <div className='gray-content-box' key={each._id} >   
+                    <div className="edit-pencil">
+                        <i onClick={() => this.toggleEdit()} className="fa fa-pencil" aria-hidden="true"></i>
+                    </div>
+                    <span className='line-spacing'>Author: {each.author} <br/></span>
                     <span className='line-spacing'>Amount: {each.amount} <br/></span>
                     <span className='line-spacing'>Date Submitted: {each.date_submitted} <br/></span>
                     <span className='line-spacing'>Date Resolved: {each.date_resolved} <br/></span>
@@ -98,7 +138,13 @@ class ViewAllReimPg extends React.Component{
                     <span className='line-spacing'>Type: {each.type} <br/></span>
 
                   </div> )
-              })}
+              
+
+
+
+
+              }))
+            }
           </Layout>
       )
   }
