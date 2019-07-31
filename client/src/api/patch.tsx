@@ -1,8 +1,6 @@
 export default {
 
     patchUser: (data) =>  { 
-        
-  
 
         let obj = {
             _id: parseInt(data._id),
@@ -17,8 +15,10 @@ export default {
         console.log('this is gonna b the object', obj)
         return fetch('/users', {
         method: 'PATCH',
-        headers: {'Content-Type':'application/json'},
-        // headers: {},
+        headers: {
+            'Content-Type':'application/json',                
+            'Authorization': 'Bearer ' + window.localStorage.getItem("token")
+        },
         body: JSON.stringify(obj)
     })
 },
@@ -45,8 +45,10 @@ patchReim: (data) =>  {
     console.log('this is gonna b the object', obj)
     return fetch('/reimbursements', {
     method: 'PATCH',
-    headers: {'Content-Type':'application/json'},
-    // headers: {},
+    headers: {
+        'Content-Type':'application/json',                
+        'Authorization': 'Bearer ' + window.localStorage.getItem("token")
+    },
     body: JSON.stringify(obj)
 })
 }

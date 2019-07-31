@@ -11,7 +11,7 @@ export default {
     // CREATE a new db entry for a single reimbursement 
     // ---------------ANYONE ALLOWED-------------------
     addOne: async (req: Request, res: Response) => {
-        console.log(req.body)
+        // console.log(req.body)
         try {            
             const reim = new Reimbursement(req.body);
             const myKeys = [...Object.keys(reim)];
@@ -31,7 +31,7 @@ export default {
     update: async (req: Request, res: Response) => {
 
         // FINANCE MANAGERS may update
-        // if(req.authData['role_id'] === 1) {
+        if(req.authData['role_id'] === 1) {
         try {
             // get a reimbursement and construct patched together obj as user
             const x = await db.query(
@@ -68,9 +68,9 @@ export default {
         } catch (err) { 
             throw err; 
         }
-    // } else {
-    //     res.json({message: "There's nothing here for you."})
-    // }
+    } else {
+        res.json({message: "There's nothing here for you."})
+    }
     
     },
 
@@ -78,7 +78,7 @@ export default {
     getStatus: async (req: Request, res: Response) => {
 
         // FINANCE MANAGERS and CURRENT USERS may get status
-        // if(req.authData.role_id === 1 || req.params.id == req.selfReference) {
+        if(req.authData.role_id === 1 || req.params.id == req.selfReference) {
             
             try {
                 // gets passed to the query
@@ -100,16 +100,16 @@ export default {
             } catch (err) { 
                 throw err; 
             } 
-        // } else {
-        //     res.json({message: "Quit it..."})
-        // }
+        } else {
+            res.json({message: "Quit it..."})
+        }
     },
 
     // get by author
     getAuthor: async (req: Request, res: Response) => {
 
         // FINANCE MANAGERS and CURRENT USERS may view author
-        // if(req.authData.role_id === 1 || req.params.id == req.selfReference){
+        if(req.authData.role_id === 1 || req.params.id == req.selfReference){
         try {
             // passed to JOIN query
             const joinFieldsOnArr = ['reimbursements._id',
@@ -129,9 +129,9 @@ export default {
             } catch (err) { 
                 throw err; 
             } 
-        // } else {
-            // res.json({message: "Only Financials and ticket holders bla bla bla"})
-        // }
+        } else {
+            res.json({message: "Only Financials and ticket holders bla bla bla"})
+        }
 
         
      

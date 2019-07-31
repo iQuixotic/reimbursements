@@ -17,15 +17,16 @@ class IndividualEmployeePg extends React.Component {
             editing: false
         }
     
-            componentWillMount = () => {
-                this.setState({ loading: true })
-                const myProps: any = this.props
-                apiGET.getSingleUser(myProps.match.params.id)
-                  .then(res => res.json())
-                  .then((res) => this.getInitialData(res))
-                  .then(() => this.setState({ loading: false }))
-                  .catch(err => { throw(err) });
-              }
+        componentWillMount = () => {
+            this.setState({ loading: true })
+            const myProps: any = this.props
+            apiGET.getSingleUser(myProps.match.params.id)
+                .then(res => res.json())
+                .then((res) => this.getInitialData(res))
+                .then(() => this.setState({ loading: false }))
+                .catch(err => { throw(err) });
+            }
+            
         getInitialData = async (...args: any) => {
             const myProps: any = this.props
             console.log('these are the args im getting', args)

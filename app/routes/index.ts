@@ -13,11 +13,11 @@ router.use('/login', loginRoutes);
 
 // MW is a helper object that contains middleware for validation and auth
 router.use('/users', 
-// MW.verifyToken, MW.getPrivileges, 
+MW.verifyToken, MW.getPrivileges, 
 userRoutes);
 
 router.use('/reimbursements', 
-// MW.verifyToken, MW.getPrivileges, 
+MW.verifyToken, MW.getPrivileges, 
 reimbursementRoutes);
 
 export default router;

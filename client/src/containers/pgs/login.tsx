@@ -1,9 +1,27 @@
 import * as React from "react";
 import { Layout } from '..';
+import { apiPOST } from "api";
+
 
 class LoginPg extends React.Component{
     public state = {
-        message: "Hello from the Login Page."
+        username: '',
+        password: ''
+    }
+
+    inputChangeHandler = (e) => {
+        this.setState({
+            [e.currentTarget.name]: e.currentTarget.value
+        })
+        console.log(this.state)
+    }
+
+    loginSubmitHandler = () => {
+        apiPOST.login(this.state)
+            .then(res => res.json())
+            // .then(res => console.log(res.token))
+            .then(res => window.localStorage.setItem("token", res.token))
+            .catch(err => { throw err })
     }
   // -----------------------------------
   public render() {
@@ -14,12 +32,16 @@ class LoginPg extends React.Component{
 
         <div className="login-inputs-div">
             <label htmlFor="username">Username: </label>
-            <input name='username' type="text"/>
+            <input onChange={e => this.inputChangeHandler(e)} 
+            name='username' type="text"/>
+
             <label htmlFor="password">Password: </label>
-            <input type='password' name='password'/>
+            <input onChange={e => this.inputChangeHandler(e)} 
+            type='password' name='password'/>
+
             <a href="#">Forgot Password...</a>
             <div className="login-and-register-btns">
-                <button>Login</button>
+                <button onClick={()=> this.loginSubmitHandler()}>Login</button>
                 <button>Register</button>
             </div>
         </div>

@@ -1,3 +1,4 @@
+
 export default {
 
     addNewUser: (data) =>  { 
@@ -12,8 +13,10 @@ export default {
         }
         return fetch('/register', {
         method: 'POST',
-        headers: {'Content-Type':'application/json'},
-        // headers: {},
+        headers: {
+            'Content-Type':'application/json',                
+            'Authorization': 'Bearer ' + window.localStorage.getItem("token")
+        },
         body: JSON.stringify(obj)
     })
 },
@@ -31,9 +34,10 @@ export default {
         }    
         return fetch('/reimbursements', {
             method: 'POST',
-            headers: {'Content-Type':'application/json'},
-            // authorization: localStorage.getItem("token");
-            // headers: {},
+            headers: {
+                'Content-Type':'application/json',                
+                'Authorization': 'Bearer ' + window.localStorage.getItem("token")
+            },
             body: JSON.stringify(obj)
         })
     },
@@ -41,12 +45,11 @@ export default {
     login: (data) => {
         let obj = {
             username: data.username, // should be from authdata login
-            password: data.amount,
+            password: data.password
         }    
         return fetch('/login', {
             method: 'POST',
-            headers: {'Content-Type':'application/json'},
-            // headers: {},
+            headers: { 'Content-Type':'application/json' },
             body: JSON.stringify(obj)
         })
     }

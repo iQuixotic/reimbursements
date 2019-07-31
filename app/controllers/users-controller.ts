@@ -8,9 +8,10 @@ export default {
 
     // READ all users
     getAll: async (req: Request, res: Response) => {
+        console.log('this will be authdata' , req.authData)
 
             // only FINANCE MANAGERS
-            // if(req.authData['role_id'] === 1) {
+            if(req.authData['role_id'] === 1) {
                 try {                 
                     const userArr = [];
 
@@ -25,16 +26,16 @@ export default {
                 } catch (err) {
                     throw err;
                 }
-            // } else{
-                // res.json({message: 'Only Finance managers may view all users'});
-            // }
+            } else{
+                res.json({message: 'Only Finance managers may view all users'});
+            }
       },
 
     // READ a single user by id
     getOne: async (req: Request, res: Response) => {
         
         // FINANCE MANAGERS and CURRENT USERS
-        // if(req.authData['role_id'] === 1 || req.params.id == req.selfReference) {
+        if(req.authData['role_id'] === 1 || req.params.id == req.selfReference) {
                 try {
                     const id = await req.params.id;
                     const x = await db.query(
@@ -46,17 +47,17 @@ export default {
                 catch (err) {
                     throw err;
                 } 
-            // } 
-            // else {
-            //     res.json({message: 'Only Finance managers or ticket holders may view users in this way.'});
-            // }
+            } 
+            else {
+                res.json({message: 'Only Finance managers or ticket holders may view users in this way.'});
+            }
     },
 
     // UPDATE a single user at any field    
     update: async (req: Request, res: Response) => {
 
         // only ADMINS
-        // if(req.authData['role_id'] === 2) {
+        if(req.authData['role_id'] === 2) {
             try {
                 console.log(req.body)
                 // get a full user and construct patched together obj as user
@@ -80,8 +81,8 @@ export default {
             } catch (err) {
                 throw err;
             } 
-        // } else {
-        //     res.json({message: "Only admins may update a user."})
-        // }
+        } else {
+            res.json({message: "Only admins may update a user."})
+        }
     }
 }

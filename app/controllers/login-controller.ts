@@ -11,6 +11,7 @@ export default {
     // CREATE a new db entry for login event
     login: async (req: Request, res: Response): Promise<User> => {
         
+        console.log(req.body)
         // boolean
         const validCredentials: boolean = await User.checkUser(req, req.body.username, req.body.password)
         
@@ -28,6 +29,7 @@ export default {
                     password: req.body.password, role_id: response.rows[0].role_id }, 
                     SECRET.TOKEN_SECRET_KEY, {expiresIn: '16h'}, (err, token) => {
                         
+                        console.log(token)
                    res.json({ token });
                 });
     
