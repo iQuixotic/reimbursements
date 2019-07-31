@@ -80,10 +80,7 @@ class IndividualEmployeePg extends React.Component {
                 {
                     this.state.editing ? (
                         <span className='patchable-inputs'>
-                            {/* <input type='text' placeholder={this.state._id}/> */}
-                            {/* <label htmlFor="passwordI">Password: </label>
-                            <input name='passwordI' type='text' placeholder={this.state.password}/>
-                             */}
+                          
                             <label htmlFor="first_name">First Name: </label>                            
                             <input onChange={(e) => this.inputChangeHandler(e)} name='first_name' type='text' placeholder={this.state.first_name}/>
                            

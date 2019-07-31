@@ -32,6 +32,20 @@ export default {
         return fetch('/reimbursements', {
             method: 'POST',
             headers: {'Content-Type':'application/json'},
+            // authorization: localStorage.getItem("token");
+            // headers: {},
+            body: JSON.stringify(obj)
+        })
+    },
+
+    login: (data) => {
+        let obj = {
+            username: data.username, // should be from authdata login
+            password: data.amount,
+        }    
+        return fetch('/login', {
+            method: 'POST',
+            headers: {'Content-Type':'application/json'},
             // headers: {},
             body: JSON.stringify(obj)
         })

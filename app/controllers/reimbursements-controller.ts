@@ -36,8 +36,25 @@ export default {
             // get a reimbursement and construct patched together obj as user
             const x = await db.query(
                 QueryMaker.getOne('reimbursements', '_id'), [req.body._id]);
-            const r = req.body.date_resolved ? {resolver: req.authData.role_id} : null;
-            const reim = await new Reimbursement({...x.rows[0], ...req.body, ...r});
+            // const r = 
+            
+            
+            
+            
+            
+            // req.body.date_resolved ? {resolver: req.authData.role_id} : null;
+
+
+
+
+
+
+
+            const reim = await new Reimbursement({...x.rows[0], ...req.body })
+                
+                
+                
+                // ...r});
             
             const myKeys = [...Object.keys(reim)];
             const myVals = [...Object.values(reim)];

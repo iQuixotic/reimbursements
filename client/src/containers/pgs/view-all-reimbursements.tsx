@@ -21,22 +21,26 @@ class ViewAllReimPg extends React.Component{
         getBy: 'status',
         idToLookFor: '',
         editing: false,
-        status: ''
+        status: '',
+        editingNum: 1,
+        sendingNum: 0
     }
     
     toggleEdit = (e) => {
-        console.log(e.currentTarget.id)
-        this.setState({ editing: !this.state.editing})
+        console.log(this.state.credits[e.target.id])
+        this.setState({ 
+            editing: !this.state.editing, 
+            editingNum: parseInt(e.target.id)
+            // sendingNum: 
+            })
+            console.log('here you go', this.state)
     }
 
     inputChangeHandler = (e) => {
         this.setState({
             [e.currentTarget.name]: e.currentTarget.value
         })
-        // console.log(e.currentTarget.value)
-        // this.setState({
-        //     getBy: e.target.
-        // })
+        console.log(this.state)
     }
 
     componentWillMount = () => {
@@ -73,7 +77,7 @@ class ViewAllReimPg extends React.Component{
     }
 
     sendPatchCredit = () => {
-        console.log(this.state.status)
+        console.log('WHAT ARE YOU ', this.state)
         
         apiPATCH.patchReim(this.state)
             .then(res => res.json())
@@ -108,6 +112,24 @@ class ViewAllReimPg extends React.Component{
                             <div className="edit-pencil">
                                 <i onClick={(e) => this.toggleEdit(e)} className="fa fa-pencil" aria-hidden="true"></i>
                             </div>
+
+                            
+                                    <div>
+                                        <span className='line-spacing'>Author: {this.state.credits[this.state.editingNum].author} <br/></span>
+                                     
+                                        <label htmlFor="amount">Amount: </label>                            
+                                        <input onChange={(e) => this.inputChangeHandler(e)} 
+                                        name='amount' type='text' 
+                                        placeholder={this.state.credits[this.state.editingNum].amount}/>
+
+                                        <label htmlFor="description">Description: </label>                            
+                                        <input onChange={(e) => this.inputChangeHandler(e)} 
+                                        name='description' type='text' 
+                                        placeholder={this.state.credits[this.state.editingNum].description}/>
+
+                                    </div>
+                               
+
                             <label htmlFor="status"></label>
                             <select onChange={(e) => this.inputChangeHandler(e)} name="status">
                                 <option value="1">Pending</option>
@@ -117,14 +139,21 @@ class ViewAllReimPg extends React.Component{
                         <button className='submit-btn' onClick={() => this.sendPatchCredit()}>Submit Changes</button>                    
                     </div>
                 </span> ):(
-              this.state.credits.map(each => {
+              this.state.credits.map((each, i) => {
                   return(
-                  <div className='gray-content-box' key={each._id} >   
-                    <div className="edit-pencil">
-                        <i id={each._id.toString()} onClick={(e) => this.toggleEdit(e)} className="fa fa-pencil" aria-hidden="true"></i>
+                  <div className='gray-content-box'  >   
+
+                    <div className="edit-pencil" key={each._id}>
+                        <i id={i.toString()} 
+                        onClick={(e) => this.toggleEdit(e)} 
+                        className="fa fa-pencil" 
+                        aria-hidden="true"></i>
                     </div>
+
+
                     <span className='line-spacing'>Author: {each.author} <br/></span>
                     <span className='line-spacing'>Amount: {each.amount} <br/></span>
+                    <span className='line-spacing'>Amount: {each.description} <br/></span>
                     <span className='line-spacing'>Date Submitted: {each.date_submitted} <br/></span>
                     <span className='line-spacing'>Date Resolved: {each.date_resolved} <br/></span>
                     <span className='line-spacing'>Resolver: {each.resolver} <br/></span>

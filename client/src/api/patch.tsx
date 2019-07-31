@@ -33,10 +33,13 @@ patchReim: (data) =>  {
         d.getSeconds()].join(':');
 
     let obj = {
-        _id: parseInt(data._id),
+        _id: data.credits[data.editingNum]._id,
+        amount: data.amount,
+        description: data.description,
         status: data.status,
         resolver: data.resolver,
-        date_resolved: dformat
+        date_resolved: dformat,
+        role_id: 1 // need to change this or hate yourself later
     }
     
     console.log('this is gonna b the object', obj)
