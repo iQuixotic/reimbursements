@@ -3,7 +3,6 @@ export default {
 
     addNewUser: (data) =>  { 
         let obj = {
-            _id: 60,
             username: data.username,
             password: data.password,
             first_name: data.firstName,
@@ -14,8 +13,7 @@ export default {
         return fetch('/register', {
         method: 'POST',
         headers: {
-            'Content-Type':'application/json',                
-            'Authorization': 'Bearer ' + window.localStorage.getItem("token")
+            'Content-Type':'application/json'             
         },
         body: JSON.stringify(obj)
     })

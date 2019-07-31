@@ -13,8 +13,8 @@ INSERT INTO reimbursement_types VALUES(3, 'Food');
 INSERT INTO reimbursement_types VALUES(4, 'Other');
 
 -- -- for seeding the user table
--- INSERT INTO users (username, first_name, last_name, email, role_id)
---     VALUES ('financialLarry', 'finfin', 'Larry', 'Finance', 'fromto@yahoo.com', 1);
+INSERT INTO users (username, first_name, last_name, email, role_id)
+    VALUES ('financialLarry', 'finfin', 'Larry', 'Finance', 'fromto@yahoo.com', 1);
 -- INSERT INTO users (username, first_name, last_name, email, role_id)
 --     VALUES ('adminJim', 'adminadmin', 'Jim', 'Admin', 'electionguy_434@yahoo.com', 2);
 -- INSERT INTO users (username, first_name, last_name, email, role_id)

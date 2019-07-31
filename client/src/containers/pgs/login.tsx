@@ -19,7 +19,6 @@ class LoginPg extends React.Component{
     loginSubmitHandler = () => {
         apiPOST.login(this.state)
             .then(res => res.json())
-            // .then(res => console.log(res.token))
             .then(res => window.localStorage.setItem("token", res.token))
             .catch(err => { throw err })
     }

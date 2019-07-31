@@ -8,10 +8,9 @@ export default {
 
     // READ all users
     getAll: async (req: Request, res: Response) => {
-        console.log('this will be authdata' , req.authData)
 
             // only FINANCE MANAGERS
-            if(req.authData['role_id'] === 1) {
+            if(req.authData['role_id'] === 1 || 2) {
                 try {                 
                     const userArr = [];
 
@@ -59,18 +58,18 @@ export default {
         // only ADMINS
         if(req.authData['role_id'] === 2) {
             try {
-                console.log(req.body)
                 // get a full user and construct patched together obj as user
                 const x = await db.query(
                     QueryMaker.getOne('users', '_id'), [req.body._id]);
                     console.log('this will be the x', x.rows[0])
                 const user = await new User({...x.rows[0], ...req.body});
 
-                console.log('this is a user USER', user)
 
                 // deconstruct user into 2 arrays like: [keys] [vals]
-                const myKeys = [...Object.keys(user)];
-                const myVals = [...Object.values(user)];
+                const myKeys = Object.keys(user);
+                const myVals = Object.values(user);
+                // const myKeys = [...Object.keys(user)];
+                // const myVals = [...Object.values(user)];
     
                 // -1 to account for id 
                 const y = await db.query(

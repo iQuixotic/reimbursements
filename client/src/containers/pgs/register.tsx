@@ -13,8 +13,9 @@ class RegisterPg extends React.Component{
     }
 
     inputChangeHandler = (e) => {
-        if(e.currentTarget.name === 'role_id') {
+        if(e.currentTarget.name === 'roleId') {
             this.setState({ [e.currentTarget.name]: parseInt(e.currentTarget.value)})
+            console.log(this.state)
         } else {
         const email = this.state.email;
         this.setState({
@@ -60,7 +61,7 @@ class RegisterPg extends React.Component{
                 <label htmlFor="lastName">Last Name: </label>
                 <input onChange={(e) => this.inputChangeHandler(e)} type='text' name='lastName'/>
 
-                <select onChange={(e) => this.inputChangeHandler(e)} name="type" id="">
+                <select onChange={(e) => this.inputChangeHandler(e)} name="roleId" id="">
                     <option value="1">Finance Manager</option>
                     <option value="2">Administrator</option>
                     <option value="3">Default User</option>

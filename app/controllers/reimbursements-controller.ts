@@ -14,8 +14,11 @@ export default {
         // console.log(req.body)
         try {            
             const reim = new Reimbursement(req.body);
-            const myKeys = [...Object.keys(reim)];
-            const myVals = [...Object.values(reim)];
+
+            const myKeys = Object.keys(reim);
+            const myVals = Object.values(reim);
+            // const myKeys = [...Object.keys(reim)];
+            // const myVals = [...Object.values(reim)];
 
             await db.query(
                 QueryMaker.insertOne('reimbursements', myKeys),
@@ -36,28 +39,14 @@ export default {
             // get a reimbursement and construct patched together obj as user
             const x = await db.query(
                 QueryMaker.getOne('reimbursements', '_id'), [req.body._id]);
-            // const r = 
+            const r =  req.body.date_resolved ? {resolver: req.authData.role_id} : null;
+
+            const reim = await new Reimbursement({...x.rows[0], ...req.body, ...r});
             
-            
-            
-            
-            
-            // req.body.date_resolved ? {resolver: req.authData.role_id} : null;
-
-
-
-
-
-
-
-            const reim = await new Reimbursement({...x.rows[0], ...req.body })
-                
-                
-                
-                // ...r});
-            
-            const myKeys = [...Object.keys(reim)];
-            const myVals = [...Object.values(reim)];
+            const myKeys = Object.keys(reim);
+            const myVals = Object.values(reim);
+            // const myKeys = [...Object.keys(reim)];
+            // const myVals = [...Object.values(reim)];
 
             // -1 to account for id not present
             await db.query(
@@ -124,7 +113,6 @@ export default {
                 'users', 'reimbursements.author', 
                 'users._id'), [req.params.id]);
 
-                console.log(x.rows)
             return res.json(x.rows);
             } catch (err) { 
                 throw err; 
@@ -132,9 +120,6 @@ export default {
         } else {
             res.json({message: "Only Financials and ticket holders bla bla bla"})
         }
-
-        
-     
     }
 
 }
