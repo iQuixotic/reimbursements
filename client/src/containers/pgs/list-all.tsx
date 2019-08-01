@@ -11,8 +11,7 @@ class ListAllPg extends React.Component{
             username: '',
             password: ''
         }],
-        // loading: true
-        
+        // loading: true        
     }
     
 

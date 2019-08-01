@@ -27,20 +27,16 @@ class ViewAllReimPg extends React.Component{
     }
     
     toggleEdit = (e) => {
-        console.log(this.state.credits[e.target.id])
         this.setState({ 
             editing: !this.state.editing, 
             editingNum: parseInt(e.target.id)
-            // sendingNum: 
-            })
-            console.log('here you go', this.state)
+        })
     }
 
     inputChangeHandler = (e) => {
         this.setState({
             [e.currentTarget.name]: e.currentTarget.value
         })
-        console.log(this.state)
     }
 
     componentWillMount = () => {
@@ -53,7 +49,6 @@ class ViewAllReimPg extends React.Component{
     getByStatus = () => {
         this.setState({ loading: true })
         const myProps: any = this.props
-        console.log(myProps.match.params.getBy)
         apiGET.getAllCreditsByStatus(myProps.match.params.id)
             .then(res => res.json())
             .then(res => this.setState({ 
@@ -66,7 +61,6 @@ class ViewAllReimPg extends React.Component{
     getByAuthor = () => {
         this.setState({ loading: true })
         const myProps: any = this.props
-        console.log(myProps.match.params.getBy)
         apiGET.getAllCreditsByAuthor(myProps.match.params.id)
             .then(res => res.json())
             .then(res => this.setState({ 
@@ -76,9 +70,7 @@ class ViewAllReimPg extends React.Component{
             .catch(err => { throw(err) });
     }
 
-    sendPatchCredit = () => {
-        console.log('WHAT ARE YOU ', this.state)
-        
+    sendPatchCredit = () => {        
         apiPATCH.patchReim(this.state)
             .then(res => res.json())
             .then(res => console.log(res))
@@ -102,7 +94,6 @@ class ViewAllReimPg extends React.Component{
                 <input type="text" name='idToLookFor' onChange={(e) => this.inputChangeHandler(e)}/>
 
                 <a href={`http://localhost:3000/creditList/${this.state.getBy}/${this.state.idToLookFor}`}
-                // onClick={() => this.checkWhatToGetBy()}
                 >Set Up</a>
 
                 {this.state.editing ? (

@@ -1,0 +1,25 @@
+    
+.nav-items {
+    position: relative;
+    display: flex;
+    z-index: 2;
+    margin-top: 67px;
+    width: 50%;
+    margin-left: 50%;
+}
+
+.nav-items li {
+    list-style: none;
+}
+
+.nav-items li a {
+    color: rgb(255, 255, 255);
+    list-style: none; 
+    font-size: 1.1rem;
+    padding: 20px 10px;
+    text-decoration: none;
+}
+
+.nav-items li a:hover {
+    color: rgb(137, 45, 212);
+}

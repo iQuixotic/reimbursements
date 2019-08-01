@@ -51,7 +51,6 @@ class Layout extends Component<IProps, IState> {
                 <div onClick={this.sideDrawerToggle}><Sidedrawer/><Backdrop/></div>                            
                 }
               </MQ>
-              }
               <div className='under-nav'>
                 {this.props.children}
               </div>

@@ -1,25 +1,23 @@
 import * as React from "react";
-// import { NavItems } from '../../../components';
+import { NavItems } from '../../../components';
 import './style.css';
 
 const Toolbar = (props: any) => {
     return (
-        <nav className='Toolbar'>
-            <div className="Toolbar-Main">
+        <nav className='toolbar'>
+            <div className="toolbar-main">
                 Reimbursements
             </div>
 
-            <div className="Toolbar-Nav">
-                <a href="/">Login</a>
-                <a href="/register">register</a>
-                <a href="/requestCredit">Req Credit</a>
-                <a href="/list">Users</a>
-                <a href="/creditList/status/1">Find By</a>
+            <div className="toolbar-nav">
 
-                {/* <NavItems
-                    nav1="Accounts" link1='/'
-                    nav2="New" link2='/new'
-                /> */}
+                <NavItems
+                    nav1="Login" link1='/'
+                    nav2="Register" link2='/register'
+                    nav3="Request Credits" link3='/requestCredit'
+                    nav4="Users" link4='/list'
+                    nav5="Find By" link5='/creditList/status/1'
+                />
             </div>
             {props.children}
         </nav>

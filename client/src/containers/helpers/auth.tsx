@@ -1,5 +1,4 @@
 import React, { Component } from 'react';
-// import { getjwt } from './jwt';
 import { apiGET } from "api";
 
 interface IProps {
@@ -28,8 +27,6 @@ class Authorize extends Component<IProps, IState> {
             this.getRole();
            
             // console.log('THIS IS THE ARR AND THE STATE.ROLEID', arr, this.state.role_id)
-
-            
         }
     }
 
@@ -53,16 +50,13 @@ class Authorize extends Component<IProps, IState> {
 
     
     render() {
-        return(
-            
+        return(            
                 this.state.isAuthorized ? (
                     <div >
                         {this.props.children}
                     </div>
                 ) : (
-                    <div>
-                        You are not Authorized to view this data...
-                    </div>
+                    <div></div>
                 )
         )
     }
