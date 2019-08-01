@@ -8,6 +8,9 @@ routerU.route('/')
     .get(usersController.getAll)
     .patch(usersController.update);
 
+routerU.route('/roleId')
+    .get(usersController.returnRoleInfo)
+
 routerU.route('/:id')
     .get(usersController.getOne);
 

@@ -1,19 +1,21 @@
 import * as React from "react";
 import { Layout } from '..';
 
-class EditStatusPg extends React.Component{
+class PageNotFound extends React.Component{
     public state = {
-        message: "Hello from the Edit the status Page."
+        message: "This is not the page you ar looking for..."
     }
   // -----------------------------------
   public render() {
       return(
           <Layout {...this.state}>
-        {this.state.message}
+            <h2>
+                {this.state.message}
+            </h2>
 
           </Layout>
       )
   }
 }
 
-export default EditStatusPg;
+export default PageNotFound;

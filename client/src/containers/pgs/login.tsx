@@ -6,7 +6,8 @@ import { apiPOST } from "api";
 class LoginPg extends React.Component{
     public state = {
         username: '',
-        password: ''
+        password: '',
+        role_id: 1,
     }
 
     inputChangeHandler = (e) => {
@@ -20,8 +21,14 @@ class LoginPg extends React.Component{
         apiPOST.login(this.state)
             .then(res => res.json())
             .then(res => window.localStorage.setItem("token", res.token))
+            // .then(() => this.getRole())
             .catch(err => { throw err })
     }
+
+   
+
+    
+
   // -----------------------------------
   public render() {
       return(
@@ -41,7 +48,7 @@ class LoginPg extends React.Component{
             <a href="#">Forgot Password...</a>
             <div className="login-and-register-btns">
                 <button onClick={()=> this.loginSubmitHandler()}>Login</button>
-                <button>Register</button>
+                {/* <button>Register</button> */}
             </div>
         </div>
 

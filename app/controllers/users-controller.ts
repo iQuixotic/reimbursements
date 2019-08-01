@@ -6,11 +6,19 @@ import { QueryMaker, User } from '../classes';
 
 export default {
 
+    returnRoleInfo: async (req: Request, res: Response) => {
+        if(req.authData['role_id'] === 1 ||
+         req.authData['role_id'] === 2 ||
+         req.authData['role_id'] === 3) {
+            res.json({ role_id: req.authData['role_id'] })
+        }
+    },
+
     // READ all users
     getAll: async (req: Request, res: Response) => {
 
             // only FINANCE MANAGERS
-            if(req.authData['role_id'] === 1 || 2) {
+            if(req.authData['role_id'] === 1 || req.authData['role_id'] === 2) {
                 try {                 
                     const userArr = [];
 

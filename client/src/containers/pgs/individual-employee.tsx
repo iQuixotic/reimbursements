@@ -22,14 +22,15 @@ class IndividualEmployeePg extends React.Component {
             const myProps: any = this.props
             apiGET.getSingleUser(myProps.match.params.id)
                 .then(res => res.json())
+                // .then(res => console.log(res))
                 .then((res) => this.getInitialData(res))
                 .then(() => this.setState({ loading: false }))
                 .catch(err => { throw(err) });
             }
-            
+
         getInitialData = async (...args: any) => {
             const myProps: any = this.props
-            console.log('these are the args im getting', args)
+            if(args[0].message) console.log(args[0].message)
             this.setState({ 
                 loading: false,
                 _id: myProps.match.params.id,

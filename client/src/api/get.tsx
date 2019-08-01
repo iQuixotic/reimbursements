@@ -1,5 +1,15 @@
 export default {
 
+    getRole: () =>  {
+        return fetch('/users/roleId', {
+            method: 'GET',
+            headers: {
+                'Content-Type':'application/json',                
+                'Authorization': 'Bearer ' + window.localStorage.getItem("token")
+            }
+        })
+    },
+
     getAllUsers: () =>  {
         return fetch('/users', {
             method: 'GET',
